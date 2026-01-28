@@ -1,0 +1,312 @@
+{
+  "site": {
+    "name": "Prahar Career Academy",
+    "tagline": "Police · Army · Defence Training"
+  },
+  "header": {
+    "slogan": "Hard work + Determination + Guidance + Faith = Progress",
+    "email": "prahar_career_academy_@gmail.com",
+    "phoneLine": "+91 9930810555 | 9594801555 | 9082546363"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "courses": "Courses",
+    "success": "Success Student",
+    "gallery": "Gallery",
+    "enquiry": "Enquiry",
+    "contact": "Contact Us",
+    "branches": "Branches",
+    "trainingDisciplineSelection": "Training · Discipline · Selection"
+  },
+  "home": {
+    "heroTitle": "Prahar Career Academy, Borivali",
+    "heroSubtitle": "Police, Army and defence training with discipline, ground work and result‑oriented guidance."
+  },
+
+  "courses": {
+    "heroImgAlt": "Prahar training ground",
+    "heroTag": "Prahar Courses",
+    "heroTitleMain": "Integrated Coaching for",
+    "heroTitleHighlight": "Police, Army & SSC GD",
+    "heroText": "Every course combines classroom coaching, ground training and a strict weekly test system so that aspirants are ready for both written and physical stages in their very first attempt.",
+    "police": {
+      "title": "Police Bharti Coaching & Training",
+      "desc": "Designed for Maharashtra Police Bharti aspirants who want complete support from basic concepts to full physical preparation and mock recruitment drills.",
+      "classroomTitle": "Classroom Coaching (Written)",
+      "classroom1": "Marathi language, Grammar and Comprehension.",
+      "classroom2": "Mathematics, Reasoning and basic Aptitude.",
+      "classroom3": "General Knowledge and Maharashtra-specific Current Affairs.",
+      "classroom4": "Weekly 25-mark subject tests and 100-mark pattern tests.",
+      "groundTitle": "Ground Training (Physical)",
+      "ground1": "1600 m / 800 m running, timing improvement drills.",
+      "ground2": "Shot put, short sprints and agility exercises.",
+      "ground3": "Strength training: push-ups, pull-ups, core and flexibility.",
+      "ground4": "Monthly 100 / 50 mark physical tests like real Bharti.",
+      "ideal": "Ideal for: 12th-pass candidates appearing for Maharashtra Police Bharti who need both written and ground preparation."
+    },
+    "army": {
+      "title": "Army Bharti Coaching & Training",
+      "desc": "Focused batch for Army Bharti / Army Agniveer aspirants with disciplined routine, personality development and interview readiness.",
+      "classroomTitle": "Classroom Coaching (Written)",
+      "classroom1": "Army GD / Clerk syllabus coverage: GK, Maths, Reasoning.",
+      "classroom2": "English / Hindi language support as per requirement.",
+      "classroom3": "Previous years’ question practice and regular mock tests.",
+      "classroom4": "Doubt-solving and performance tracking for every cadet.",
+      "groundTitle": "Ground Training (Physical)",
+      "ground1": "Daily running sessions with time tracking.",
+      "ground2": "Pull-ups, push-ups, sit-ups, long jump and high jump.",
+      "ground3": "Endurance, stamina and diet guidance from experienced trainers.",
+      "ground4": "Mock physical rounds conducted regularly like rally.",
+      "ideal": "Ideal for: Students targeting Army Bharti who want a disciplined environment and close monitoring of daily routine."
+    },
+    "ssc": {
+      "title": "SSC GD / CAPF & Defence Exams",
+      "desc": "Batch for SSC GD, CAPF and similar central defence exams with focus on concept clarity, speed and mock-test based practice.",
+      "writtenTitle": "Written Exam Focus",
+      "written1": "General Intelligence & Reasoning, General Awareness.",
+      "written2": "Elementary Mathematics and English / Hindi.",
+      "written3": "Section-wise practice plus full-length mock tests.",
+      "written4": "Time management training and error analysis sessions.",
+      "physicalTitle": "Physical & Medical Guidance",
+      "physical1": "Basic ground training for PET / PST standards.",
+      "physical2": "Height, chest, weight and BMI guidance as per norms.",
+      "physical3": "Tips for document verification and medical fitness.",
+      "ideal": "Ideal for: Candidates preparing for SSC GD / CAPF along with other defence opportunities."
+    },
+    "physical": {
+      "title": "Only Physical Training Batch",
+      "desc": "For students who are already managing written preparation or have cleared written exam and now want 100% focus on physical.",
+      "routineTitle": "Ground Routine",
+      "routine1": "Daily warm-up, stretching and injury-prevention drills.",
+      "routine2": "Running program tailored to target time for each exam.",
+      "routine3": "Strength and core workouts, circuit training and sprints.",
+      "routine4": "Monthly full physical mock test with marks and feedback.",
+      "ideal": "Recommended for: Aspirants from any academy or self-study who need disciplined ground and expert monitoring."
+    },
+    "test": {
+      "marathi": {
+        "title": "बौद्धिक व शारीरिक चाचणी प्रणाली",
+        "subtitle": "(लेखी परीक्षा आणि मैदानी चाचणी) – प्रहार करिअर अकॅडमी",
+        "l1": "प्रत्येक आठवड्यात प्रत्येक विषयाची २५ गुणांची परीक्षा घेतली जाते.",
+        "l2": "प्रत्येक १५ दिवसाला १०० गुणांची पोलीस भरतीच्या लेखी परीक्षेप्रमाणे बौद्धिक चाचणी घेतली जाते.",
+        "l3": "विद्यार्थ्यांच्या गुणवत्तेत वाढीसाठी प्रत्येक विषयाची १०० गुणांची सराव चाचणी घेतली जाते.",
+        "l4": "दर महिन्याला भरती प्रक्रियेनुसार १०० / ५० गुणांची मैदानी चाचणी घेतली जाते.",
+        "l5": "लेखी आणि मैदानी तयारीसाठी तज्ञ व अनुभवी शिक्षक मार्गदर्शन करतात.",
+        "l6": "तयारी अशी करून घेतली जाईल की विद्यार्थी हा पहिल्याच प्रयत्नात निवड झाला पाहिजे.",
+        "extra1": "प्रत्येक महिन्याला संपूर्ण भरती प्रक्रिया करून घेतली जाते.",
+        "extra2": "सर्व प्रकारच्या भरतीची सविस्तर माहिती दिली जाते."
+      },
+      "english": {
+        "title": "Intellectual and Physical Test System",
+        "subtitle": "(Written Examination and Ground Test) – Prahar Career Academy",
+        "l1": "A 25-mark test for each subject is conducted every week.",
+        "l2": "Every 15 days, a 100-mark intellectual (written) test is conducted as per the police recruitment pattern.",
+        "l3": "To improve students’ performance, a 100-mark practice test for each subject is conducted.",
+        "l4": "Every month, ground tests of 100 / 50 marks are held according to the recruitment process.",
+        "l5": "Expert and experienced teachers train students for both written and ground tests.",
+        "l6": "Preparation is planned so that students aim to get selected in their very first attempt.",
+        "extra1": "The complete recruitment process is simulated every month.",
+        "extra2": "Detailed information about all types of recruitments is provided."
+      }
+    },
+    "cta": {
+      "text": "Want to know which course is right for you based on age, fitness and goal?",
+      "button": "Submit Enquiry for Course Guidance"
+    }
+  },
+
+  "gallery": {
+    "heroTag": "Prahar Gallery",
+    "heroTitle": "Glimpses of Ground Training & Classroom",
+    "heroText": "See how Prahar cadets prepare every day for Police Bharti, Army Bharti, SSC GD and other defence exams with disciplined training and powerful motivation."
+  },
+  "enquiry": {
+    "heroTitle": "Enquiry for Course Guidance",
+    "heroText": "Share your goal, age and fitness level so our team can guide you to the correct batch and training plan."
+  },
+
+  "enquiryPage": {
+    "heroImgAlt": "Prahar ground training",
+    "heroTag": "Enquiry for Admission",
+    "heroTitleMain": "Take the First Step Towards Your",
+    "heroTitleHighlight": "Uniform",
+    "heroText": "Share your details and the academy team will guide you with course options, batches and physical training plans tailored to your goal.",
+    "form": {
+      "title": "Enquiry for Admission",
+      "subtitle": "Fill this form with correct details. Team Prahar will contact you with batch timing, fees and physical training schedule.",
+      "fullNameLabel": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "mobileLabel": "Mobile Number",
+      "mobilePlaceholder": "e.g. 9930810555",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "courseLabel": "Preferred Course",
+      "coursePlaceholder": "Select course / exam",
+      "coursePolice": "Police Bharti Coaching & Training",
+      "courseArmy": "Army Bharti Coaching & Training",
+      "courseSSC": "SSC GD / CAPF / Defense Exams",
+      "coursePhysical": "Only Physical Training",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Share your goal, exam name, and preferred batch timing.",
+      "submitButton": "Submit Enquiry",
+      "disclaimer": "By submitting the form you agree to be contacted via call or WhatsApp for admission-related information only."
+    },
+    "why": {
+      "title": "Why enquire at Prahar?",
+      "l1": "Guidance for Police, Army and other defense exams.",
+      "l2": "Personalized physical training plans as per goal and level.",
+      "l3": "Batch timing options for students and working aspirants.",
+      "l4": "Transparent information about fees and facilities.",
+      "l5": "Motivating environment focused on discipline and results."
+    },
+    "office": {
+      "title": "Head Office - Borivali",
+      "address": "Borivali Shopping Center, D Wing, First Floor, 114, Chandavarkar Road, Borivali (W), Mumbai - 400091.",
+      "callLabel": "Call:",
+      "callValue": "9930810555 / 9594801555 / 9082546363",
+      "emailLabel": "Email:"
+    },
+    "tests": {
+      "marathi": {
+        "title": "बौद्धिक व शारीरिक चाचणी",
+        "subtitle": "(लेखी परीक्षा आणि मैदानी चाचणी) – प्रहार करिअर अकॅडमी",
+        "l1": "प्रत्येक आठवड्यात प्रत्येक विषयाची २५ गुणांची परीक्षा घेतली जाते.",
+        "l2": "प्रत्येक १५ दिवसाला १०० गुणांची पोलीस भरतीच्या लेखी परीक्षेप्रमाणे बौद्धिक चाचणी घेतली जाते.",
+        "l3": "विद्यार्थ्यांच्या गुणवत्तेत वाढीसाठी प्रत्येक विषयाची १०० गुणांची सराव चाचणी घेतली जाते.",
+        "l4": "दर महिन्याला भरती प्रक्रियेनुसार १०० / ५० गुणांची मैदानी चाचणी घेतली जाते.",
+        "l5": "लेखी आणि मैदानी तयारीसाठी तज्ञ व अनुभवी शिक्षक मार्गदर्शन करतात.",
+        "l6": "तयारी अशी करून घेतली जाईल की विद्यार्थी हा पहिल्याच प्रयत्नात निवड झाला पाहिजे.",
+        "extra1": "प्रत्येक महिन्याला संपूर्ण भरती प्रक्रिया करून घेतली जाते.",
+        "extra2": "सर्व प्रकारच्या भरतीची सविस्तर माहिती दिली जाते."
+      },
+      "english": {
+        "title": "Intellectual and Physical Tests",
+        "subtitle": "(Written Examination and Ground Test) – Prahar Career Academy",
+        "l1": "A 25-mark test for each subject is conducted every week.",
+        "l2": "Every 15 days, a 100-mark intellectual (written) test is conducted as per the police recruitment pattern.",
+        "l3": "To improve students’ performance, a 100-mark practice test for each subject is conducted.",
+        "l4": "Every month, ground tests of 100 / 50 marks are held according to the recruitment process.",
+        "l5": "Expert and experienced teachers train students for both written and ground tests.",
+        "l6": "Preparation is planned so that students aim to get selected in their very first attempt.",
+        "extra1": "The complete recruitment process is simulated every month.",
+        "extra2": "Detailed information about all types of recruitments is provided."
+      }
+    }
+  },
+
+  "contact": {
+    "heroTag": "Contact Prahar Career Academy",
+    "heroTitleMain": "Stay connected with",
+    "heroTitleHighlight": "Prahar Training Family",
+    "heroText1": "Reach your nearest Prahar Career Academy branch for admission, training schedules and recruitment guidance. Our team is ready to help you at every step.",
+    "heroText2": "Call any branch directly or fill the enquiry form on the admission page. You can also visit the ground during training hours to experience the environment.",
+    "heroImgAltMain": "Prahar training ground",
+    "heroImgAltGroup": "Prahar group photo",
+    "heroImgAltSession": "Prahar training session",
+    "branchesTitle": "Prahar Career Academy Branches",
+    "generalLine1": "For any general queries, email",
+    "generalLine2": "or call the nearest branch during office hours.",
+    "branches": {
+      "borivali": {
+        "city": "Borivali (Office)",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "Borivali Shopping Center, D Wing, First Floor, 114 Chandavarkar Road, Borivali (W) Mumbai, Maharashtra - 400091",
+        "phone": "9594801555"
+      },
+      "thane": {
+        "city": "Thane (H.O)",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "Kishor Nagar Building, A-1, First Floor, In front of Gavdevi Temple, Kopri Colony, Near Thane Railway Station, Thane (East) – 400603",
+        "phone": "9594359555"
+      },
+      "kalyan": {
+        "city": "Kalyan",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "",
+        "phone": "9820808333"
+      },
+      "ghatkopar": {
+        "city": "Ghatkopar",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "",
+        "phone": "959434111"
+      },
+      "chembur": {
+        "city": "Chembur",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "",
+        "phone": "9594080222"
+      },
+      "nalasopara": {
+        "city": "Nalasopara",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "",
+        "phone": "9930264666"
+      },
+      "pen": {
+        "city": "Pen",
+        "name": "PRAHAR CAREER ACADEMY",
+        "address": "",
+        "phone": "9833896111"
+      }
+    }
+  },
+
+  "about": {
+    "heroTitle": "Turning Defense Aspirations into",
+    "heroTitleHighlight": "Real Careers",
+    "heroText1": "Prahar Career Academy is dedicated to preparing disciplined and determined aspirants for police and armed forces careers through focused coaching and intensive physical training.",
+    "heroText2": "This hero area is designed for your photos or banners. Replace the placeholder image on the right with your academy training images or group photos.",
+    "pageTitle": "PRAHAR CAREER ACADEMY",
+    "intro": "Achieving your dream job is one of the most powerful moments in life. It represents not just success, but years of determination, discipline, and sacrifice. Such an achievement builds self-confidence and gives life a strong sense of purpose, which is why preparing in the right direction is not an option it is a necessity.",
+    "p1": "For those who dream of wearing the uniform and serving the nation through police services or armed forces like the Military, the journey is challenging yet deeply honorable. This dream demands courage, strength, and unwavering commitment, and Prahar Career Academy stands beside such aspirants with the right training and direction to turn ambition into reality.",
+    "p2": "In today’s rapidly growing competition, securing a government job has become tougher than ever. Every year, countless aspirants compete for a limited number of positions, making success rare and valuable, and only those who prepare strategically and consistently rise above the crowd.",
+    "p3": "In such a competitive environment, hard work alone is not enough. Smart preparation, expert guidance, and the right mentorship play a decisive role in shaping success. When your efforts are guided in the right direction, every drop of sweat brings you closer to your goal.",
+    "p4": "Many aspirants perform exceptionally well in written examinations yet fail to clear the physical fitness test, which often becomes the biggest barrier between them and their dream career. These setbacks can be disheartening, but with proper training they are completely avoidable.",
+    "p5": "Modern lifestyles dominated by mobile phones, online games, and reduced physical activity have weakened overall fitness levels, causing many capable candidates to struggle to meet physical standards. Recognizing this reality is the first step toward building strength and overcoming limitations.",
+    "p6": "At Prahar Career Academy, physical fitness is treated as the foundation of success. Aspirants are trained to build stamina, strength, speed, and endurance through structured and progressive programs where each session is designed to push limits while ensuring safety and consistency.",
+    "p7": "The academy prepares candidates specifically for the physical tests required in armed forces recruitment. Under expert supervision, aspirants receive personalized attention that helps them correct weaknesses, boost performance, and develop confidence in their physical abilities.",
+    "p8": "Beyond physical training, Prahar Career Academy instills discipline, mental toughness, and self-belief qualities that define true warriors. Aspirants are motivated to adopt a healthy routine, stay focused, and remain mentally strong throughout their preparation journey.",
+    "p9": "By choosing Prahar Career Academy, aspirants choose belief, direction, and determination. With the right guidance and unwavering support, the dream of serving the nation in police or armed forces can become a proud reality. The journey may be tough, but with Prahar, you never walk alone.",
+    "whyTitle": "Why Prahar Career Academy?",
+    "why1": "Focused training for police and armed forces recruitment.",
+    "why2": "Structured physical programs for stamina, strength, and speed.",
+    "why3": "Personalized guidance to overcome individual weaknesses.",
+    "why4": "Strong emphasis on discipline, routine, and mental toughness.",
+    "why5": "Supportive environment that keeps aspirants motivated.",
+    "commitmentLabel": "Our Commitment",
+    "commitmentText": "To stand beside every dedicated aspirant until the dream of wearing the uniform becomes a reality."
+  },
+
+  "footer": {
+    "office_thane":"Head Office (Thane)",
+    "address_thane":"Kishor Nagar Building, A-1, First Floor, In front of Gavdevi Temple, Kopri Colony, Near Thane Railway Station, Thane (East) – 400603",
+    "headOffice": "Office (Borivali)",
+    "addressLine1": "Borivali Shopping Center, D Wing, First Floor, 114, Chandavarkar",
+    "addressLine2": " Road, Borivali (W), Mumbai Maharashtra - 400091",
+    "coursesTitle": "Courses & Training",
+    "courses": {
+      "police": "Police Bharti Coaching & Training",
+      "army": "Army Bharti Coaching & Training",
+      "taarmy":"Territorial Army Bharti",
+      "sscgd": "SSC GD Coaching & Training",
+      "rpf": "RPF Physical Training",
+      "fitness": "Fitness Physical Training",
+      "allPhysical": "All Physical Training"
+    },
+    "quickLinksTitle": "Quick Links",
+    "links": {
+      "aboutUs": "About US",
+      "directorDesk": "Director Desk",
+      "photo": "Photo",
+      "video": "Video",
+      "successStudent": "Success Student",
+      "enquiry": "Enquiry"
+    },
+    "branchesTitle": "Branches",
+    "moreBranchesTitle": "More Branches",
+    "bottomLine": "© 2025 Prahar Career Academy. All rights reserved.",
+    "bottomSubtitle": "Developed with discipline & precision for future warriors."
+  }
+}
