@@ -7,8 +7,8 @@ const Courses = () => {
   const { t } = useTranslation("common");
 
   return (
-    <div className="min-h-screen bg-[#050509] text-gray-100 flex flex-col">
-      {/* Hero */}
+    <div className="min-h-screen bg-[#050509] text-gray-100 flex flex-col text-justify">
+      {/* Hero - UNTOUCHED */}
       <section className="relative w-full h-56 md:h-64 lg:h-72 overflow-hidden">
         <img
           src={HeroImg}
@@ -34,190 +34,314 @@ const Courses = () => {
         </div>
       </section>
 
-      <main className="flex-1">
-        <section className="relative py-10 md:py-14">
-          <div className="pointer-events-none absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_top,_#facc15_0,_transparent_55%),radial-gradient(circle_at_bottom,_#22d3ee_0,_transparent_55%)]" />
+      {/* White background section starts here */}
+      <main className="flex-1 bg-white text-gray-900">
+        <section className="relative py-16 md:py-20">
+          {/* Subtle white background gradient */}
+          <div className="pointer-events-none absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_top,_#fef3c7_0,_transparent_55%),radial-gradient(circle_at_bottom,_#dbeafe_0,_transparent_55%)]" />
 
-          <div className="relative max-w-6xl mx-auto px-4 space-y-10">
-            {/* Courses grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+          <div className="relative max-w-6xl mx-auto px-6 lg:px-8 space-y-16">
+            {/* Main Courses Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
               {/* Police Bharti */}
-              <div className="rounded-2xl bg-black/70 border border-yellow-400/35 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur space-y-3">
-                <h2 className="text-lg md:text-xl font-semibold text-yellow-300">
-                  {t("courses.police.title")}
-                </h2>
-                <p className="text-xs md:text-sm text-gray-200">
-                  {t("courses.police.desc")}
-                </p>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.police.classroomTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.police.classroom1")}</li>
-                  <li>{t("courses.police.classroom2")}</li>
-                  <li>{t("courses.police.classroom3")}</li>
-                  <li>{t("courses.police.classroom4")}</li>
-                </ul>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.police.groundTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.police.ground1")}</li>
-                  <li>{t("courses.police.ground2")}</li>
-                  <li>{t("courses.police.ground3")}</li>
-                  <li>{t("courses.police.ground4")}</li>
-                </ul>
-                <p className="text-[11px] md:text-xs text-yellow-300">
-                  {t("courses.police.ideal")}
-                </p>
+              <div className="group relative rounded-3xl bg-white/80 border border-yellow-200/50 p-8 md:p-10 shadow-xl backdrop-blur-xl hover:shadow-2xl hover:shadow-yellow-200/50 transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/80 to-yellow-100/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                    {t("courses.police.title")}
+                  </h2>
+
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    {t("courses.police.desc")}
+                  </p>
+
+                  <div className="space-y-4 pt-4 border-t border-yellow-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-yellow-400 mr-2" />
+                      {t("courses.police.classroomTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.police.classroom1"),
+                        t("courses.police.classroom2"),
+                        t("courses.police.classroom3"),
+                        t("courses.police.classroom4"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-yellow-400/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4 pt-4 border-t border-yellow-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-yellow-400 mr-2" />
+                      {t("courses.police.groundTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.police.ground1"),
+                        t("courses.police.ground2"),
+                        t("courses.police.ground3"),
+                        t("courses.police.ground4"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-yellow-400/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <p className="text-sm font-semibold text-gray-900 bg-yellow-50 px-5 py-4 rounded-2xl border-2 border-yellow-200">
+                    {t("courses.police.ideal")}
+                  </p>
+                </div>
               </div>
 
               {/* Army Bharti */}
-              <div className="rounded-2xl bg-black/70 border border-green-400/35 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur space-y-3">
-                <h2 className="text-lg md:text-xl font-semibold text-green-300">
-                  {t("courses.army.title")}
-                </h2>
-                <p className="text-xs md:text-sm text-gray-200">
-                  {t("courses.army.desc")}
-                </p>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.army.classroomTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.army.classroom1")}</li>
-                  <li>{t("courses.army.classroom2")}</li>
-                  <li>{t("courses.army.classroom3")}</li>
-                  <li>{t("courses.army.classroom4")}</li>
-                </ul>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.army.groundTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.army.ground1")}</li>
-                  <li>{t("courses.army.ground2")}</li>
-                  <li>{t("courses.army.ground3")}</li>
-                  <li>{t("courses.army.ground4")}</li>
-                </ul>
-                <p className="text-[11px] md:text-xs text-green-300">
-                  {t("courses.army.ideal")}
-                </p>
-              </div>
+              <div className="group relative rounded-3xl bg-white/80 border border-green-200/50 p-8 md:p-10 shadow-xl backdrop-blur-xl hover:shadow-2xl hover:shadow-green-200/50 transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-green-100/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                    {t("courses.army.title")}
+                  </h2>
 
-              {/* SSC GD / CAPF / Defence exams */}
-              <div className="rounded-2xl bg-black/70 border border-sky-400/35 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur space-y-3">
-                <h2 className="text-lg md:text-xl font-semibold text-sky-300">
-                  {t("courses.ssc.title")}
-                </h2>
-                <p className="text-xs md:text-sm text-gray-200">
-                  {t("courses.ssc.desc")}
-                </p>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.ssc.writtenTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.ssc.written1")}</li>
-                  <li>{t("courses.ssc.written2")}</li>
-                  <li>{t("courses.ssc.written3")}</li>
-                  <li>{t("courses.ssc.written4")}</li>
-                </ul>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.ssc.physicalTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.ssc.physical1")}</li>
-                  <li>{t("courses.ssc.physical2")}</li>
-                  <li>{t("courses.ssc.physical3")}</li>
-                </ul>
-                <p className="text-[11px] md:text-xs text-sky-300">
-                  {t("courses.ssc.ideal")}
-                </p>
-              </div>
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    {t("courses.army.desc")}
+                  </p>
 
-              {/* Only Physical Training */}
-              <div className="rounded-2xl bg-black/70 border border-red-400/35 p-6 shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur space-y-3">
-                <h2 className="text-lg md:text-xl font-semibold text-red-300">
-                  {t("courses.physical.title")}
-                </h2>
-                <p className="text-xs md:text-sm text-gray-200">
-                  {t("courses.physical.desc")}
-                </p>
-                <h3 className="text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                  {t("courses.physical.routineTitle")}
-                </h3>
-                <ul className="text-[11px] md:text-xs text-gray-200 space-y-1.5 list-disc list-inside">
-                  <li>{t("courses.physical.routine1")}</li>
-                  <li>{t("courses.physical.routine2")}</li>
-                  <li>{t("courses.physical.routine3")}</li>
-                  <li>{t("courses.physical.routine4")}</li>
-                </ul>
-                <p className="text-[11px] md:text-xs text-red-300">
-                  {t("courses.physical.ideal")}
-                </p>
+                  <div className="space-y-4 pt-4 border-t border-green-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-green-500 mr-2" />
+                      {t("courses.army.classroomTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.army.classroom1"),
+                        t("courses.army.classroom2"),
+                        t("courses.army.classroom3"),
+                        t("courses.army.classroom4"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-green-500/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4 pt-4 border-t border-green-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-green-500 mr-2" />
+                      {t("courses.army.groundTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.army.ground1"),
+                        t("courses.army.ground2"),
+                        t("courses.army.ground3"),
+                        t("courses.army.ground4"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-green-500/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <p className="text-sm font-semibold text-gray-900 bg-green-50 px-5 py-4 rounded-2xl border-2 border-green-200">
+                    {t("courses.army.ideal")}
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Intellectual + Physical Test system (Marathi + English) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Second Row - SSC & Physical */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+              {/* SSC GD */}
+              <div className="group relative rounded-3xl bg-white/80 border border-blue-200/50 p-8 md:p-10 shadow-xl backdrop-blur-xl hover:shadow-2xl hover:shadow-blue-200/50 transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-blue-100/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                    {t("courses.ssc.title")}
+                  </h2>
+
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    {t("courses.ssc.desc")}
+                  </p>
+
+                  <div className="space-y-4 pt-4 border-t border-blue-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-blue-500 mr-2" />
+                      {t("courses.ssc.writtenTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.ssc.written1"),
+                        t("courses.ssc.written2"),
+                        t("courses.ssc.written3"),
+                        t("courses.ssc.written4"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4 pt-4 border-t border-blue-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-blue-500 mr-2" />
+                      {t("courses.ssc.physicalTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.ssc.physical1"),
+                        t("courses.ssc.physical2"),
+                        t("courses.ssc.physical3"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <p className="text-sm font-semibold text-gray-900 bg-blue-50 px-5 py-4 rounded-2xl border-2 border-blue-200">
+                    {t("courses.ssc.ideal")}
+                  </p>
+                </div>
+              </div>
+
+              {/* Physical Training */}
+              <div className="group relative rounded-3xl bg-white/80 border border-red-200/50 p-8 md:p-10 shadow-xl backdrop-blur-xl hover:shadow-2xl hover:shadow-red-200/50 transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-red-100/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative space-y-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                    {t("courses.physical.title")}
+                  </h2>
+
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    {t("courses.physical.desc")}
+                  </p>
+
+                  <div className="space-y-4 pt-4 border-t border-red-200">
+                    <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider flex items-center">
+                      <span className="inline-block w-1.5 h-5 rounded-full bg-red-500 mr-2" />
+                      {t("courses.physical.routineTitle")}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {[
+                        t("courses.physical.routine1"),
+                        t("courses.physical.routine2"),
+                        t("courses.physical.routine3"),
+                        t("courses.physical.routine4"),
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start space-x-3">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-red-500/70 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <p className="text-sm font-semibold text-gray-900 bg-red-50 px-5 py-4 rounded-2xl border-2 border-red-200">
+                    {t("courses.physical.ideal")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Test System Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
               {/* Marathi */}
-              <div className="backdrop-blur-xl bg-black/65 border border-white/10 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.55)] p-5 md:p-6 space-y-3">
-                <h3 className="text-sm md:text-base font-semibold text-yellow-300">
-                  {t("courses.test.marathi.title")}
-                  <span className="block text-[11px] md:text-xs text-gray-300">
-                    {t("courses.test.marathi.subtitle")}
-                  </span>
-                </h3>
+              <div className="group relative rounded-3xl bg-white/90 border border-amber-200/60 p-10 shadow-xl backdrop-blur-xl hover:shadow-2xl hover:shadow-amber-200/50 transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-50/80 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative space-y-6">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+                    {t("courses.test.marathi.title")}
+                    <span className="block text-lg font-medium text-gray-600 mt-3">
+                      {t("courses.test.marathi.subtitle")}
+                    </span>
+                  </h3>
 
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-gray-200">
-                  <li>{t("courses.test.marathi.l1")}</li>
-                  <li>{t("courses.test.marathi.l2")}</li>
-                  <li>{t("courses.test.marathi.l3")}</li>
-                  <li>{t("courses.test.marathi.l4")}</li>
-                  <li>{t("courses.test.marathi.l5")}</li>
-                  <li>{t("courses.test.marathi.l6")}</li>
-                </ul>
+                  <div className="space-y-4">
+                    <ul className="list-disc list-inside space-y-3 text-sm lg:text-base text-gray-700 pt-2">
+                      {[
+                        t("courses.test.marathi.l1"),
+                        t("courses.test.marathi.l2"),
+                        t("courses.test.marathi.l3"),
+                        t("courses.test.marathi.l4"),
+                        t("courses.test.marathi.l5"),
+                        t("courses.test.marathi.l6"),
+                      ].map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
 
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-yellow-300">
-                  <li>{t("courses.test.marathi.extra1")}</li>
-                  <li>{t("courses.test.marathi.extra2")}</li>
-                </ul>
+                    <ul className="list-disc list-inside space-y-3 text-sm lg:text-base text-amber-700 pt-6 border-t border-amber-200 bg-amber-50/50 p-4 rounded-2xl">
+                      <li>{t("courses.test.marathi.extra1")}</li>
+                      <li>{t("courses.test.marathi.extra2")}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               {/* English */}
-              <div className="backdrop-blur-xl bg-black/65 border border-white/10 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.55)] p-5 md:p-6 space-y-3">
-                <h3 className="text-sm md:text-base font-semibold text-yellow-300">
-                  {t("courses.test.english.title")}
-                  <span className="block text-[11px] md:text-xs text-gray-300">
-                    {t("courses.test.english.subtitle")}
-                  </span>
-                </h3>
+              <div className="group relative rounded-3xl bg-white/90 border border-amber-200/60 p-10 shadow-xl backdrop-blur-xl hover:shadow-2xl hover:shadow-amber-200/50 transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-50/80 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative space-y-6">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+                    {t("courses.test.english.title")}
+                    <span className="block text-lg font-medium text-gray-600 mt-3">
+                      {t("courses.test.english.subtitle")}
+                    </span>
+                  </h3>
 
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-gray-200">
-                  <li>{t("courses.test.english.l1")}</li>
-                  <li>{t("courses.test.english.l2")}</li>
-                  <li>{t("courses.test.english.l3")}</li>
-                  <li>{t("courses.test.english.l4")}</li>
-                  <li>{t("courses.test.english.l5")}</li>
-                  <li>{t("courses.test.english.l6")}</li>
-                </ul>
+                  <div className="space-y-4">
+                    <ul className="list-disc list-inside space-y-3 text-sm lg:text-base text-gray-700 pt-2">
+                      {[
+                        t("courses.test.english.l1"),
+                        t("courses.test.english.l2"),
+                        t("courses.test.english.l3"),
+                        t("courses.test.english.l4"),
+                        t("courses.test.english.l5"),
+                        t("courses.test.english.l6"),
+                      ].map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
 
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-yellow-300">
-                  <li>{t("courses.test.english.extra1")}</li>
-                  <li>{t("courses.test.english.extra2")}</li>
-                </ul>
+                    <ul className="list-disc list-inside space-y-3 text-sm lg:text-base text-amber-700 pt-6 border-t border-amber-200 bg-amber-50/50 p-4 rounded-2xl">
+                      <li>{t("courses.test.english.extra1")}</li>
+                      <li>{t("courses.test.english.extra2")}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Call to action */}
-            <div className="text-center pt-4">
-              <p className="text-xs md:text-sm text-gray-300 mb-3">
-                {t("courses.cta.text")}
-              </p>
-              <a
-                href="/enquiry"
-                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 px-6 py-2.5 text-sm font-semibold text-black shadow-[0_12px_30px_rgba(248,250,109,0.45)] hover:brightness-110 active:scale-[0.98] transition"
-              >
-                {t("courses.cta.button")}
-              </a>
+            {/* CTA */}
+            <div className="text-center pt-16">
+              <div className="max-w-2xl mx-auto">
+                <p className="text-base lg:text-lg text-gray-700 mb-10 px-6 leading-relaxed">
+                  {t("courses.cta.text")}
+                </p>
+                <a
+                  href="/enquiry"
+                  className="group relative inline-flex items-center justify-center px-12 py-5 text-xl font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-gray-900 rounded-3xl shadow-2xl hover:shadow-3xl hover:shadow-yellow-300/50 hover:brightness-105 active:scale-[0.97] transition-all duration-300 hover:-translate-y-1"
+                >
+                  <span className="relative z-10 tracking-wide">
+                    {t("courses.cta.button")}
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </section>

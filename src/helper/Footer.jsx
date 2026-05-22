@@ -26,102 +26,123 @@ const quickLinks = [
   { nameKey: "footer.links.enquiry", href: "/enquiry" },
 ];
 
+const SocialIcon = ({ label, href = "#" }) => (
+  <a
+    href={href}
+    aria-label={label}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-[11px] font-bold text-white hover:text-amber-400 hover:border-amber-400/60 hover:-translate-y-0.5 transition-all duration-200"
+  >
+    {label}
+  </a>
+);
+
+const SectionHeading = ({ children, accent = "amber" }) => (
+  <div className="mb-5">
+    <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60 mb-3">
+      {children}
+    </h3>
+    <div className={`h-px w-8 ${accent === "emerald" ? "bg-emerald-500" : "bg-amber-500"}`} />
+  </div>
+);
+
+const NavLink = ({ to, children, color = "amber" }) => (
+  <li>
+    <Link
+      to={to}
+      className={`text-sm text-white hover:${
+        color === "emerald" ? "text-emerald-400" : "text-amber-400"
+      } transition-colors duration-150 leading-relaxed`}
+    >
+      {children}
+    </Link>
+  </li>
+);
+
 const Footer = () => {
   const { t } = useTranslation("common");
 
   return (
-    <footer className="relative bg-black text-white text-sm overflow-hidden">
-      {/* Main content */}
-      <div className="relative max-w-6xl mx-auto px-4 py-10 md:py-14 grid gap-10 md:gap-8 md:grid-cols-4 lg:grid-cols-5">
-        {/* Brand / logo + head office */}
-        <div className="space-y-5 md:col-span-2 lg:col-span-2">
+    <footer className="bg-[#0e0e0e] text-white border-t border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 lg:gap-10">
+
+        {/* ── Brand column ── */}
+        <div className="space-y-7">
           {/* Logo + name */}
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-lg bg-gradient-to-br via-yellow-300 to-orange-500 flex items-center justify-center shadow-[0_0_35px_rgba(245,158,11,0.9)] overflow-hidden">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-xl overflow-hidden ring-1 ring-white/10 flex-shrink-0">
               <img
                 src={Logo}
                 alt={t("site.name")}
-                className="h-full w-full object-contain"
+                className="w-full h-full object-contain bg-black"
               />
             </div>
             <div>
-              <p className="text-sm font-semibold tracking-[0.22em] uppercase text-white">
+              <p className="font-bold text-white tracking-wide leading-tight">
                 {t("site.name")}
               </p>
-              <p className="text-[11px] tracking-[0.18em] uppercase text-amber-300/90">
+              <p className="text-[11px] text-amber-400/80 tracking-widest uppercase mt-0.5">
                 {t("site.tagline")}
               </p>
             </div>
           </div>
 
-          {/* Head office (Thane) – compact block like Borivali */}
-          <div className="space-y-1">
-            <p className="font-medium text-amber-300">
-              {t("footer.office_thane")}
-            </p>
-            <p className="text-sm text-white/80 max-w-md leading-relaxed">
-              {t("footer.address_thane")}
-            </p>
-          </div>
+          {/* Addresses */}
+          <div className="space-y-4">
+            <div>
+              <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-amber-400/80 mb-1.5">
+                {t("footer.headOffice")}
+              </p>
+              <p className="text-sm text-white leading-relaxed max-w-xs">
+                {t("footer.addressLine1")}
+              </p>
+              <p className="text-sm text-white leading-relaxed">
+                {t("footer.addressLine2")}
+              </p>
+            </div>
 
-          {/* Borivali-style address block */}
-          <div className="space-y-1 text-xs sm:text-sm text-white/70">
-            <p className="font-medium text-amber-300">
-              {t("footer.headOffice")}
-            </p>
-            <p>{t("footer.addressLine1")}</p>
-            <p>{t("footer.addressLine2")}</p>
+            <div>
+              <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-white/70 mb-1.5">
+                {t("footer.office_thane")}
+              </p>
+              <p className="text-sm text-white leading-relaxed max-w-xs">
+                {t("footer.address_thane")}
+              </p>
+            </div>
           </div>
 
           {/* Contact */}
-          <div className="mt-3 space-y-2 text-xs sm:text-sm">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-white/5 border border-white/20 text-[11px]">
-                ☎
-              </span>
-              <a
-                href="tel:9930810555"
-                className="hover:text-amber-300 transition-colors duration-200"
-              >
-                {t("header.phoneLine")}
-              </a>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-white/5 border border-white/20 text-[11px]">
-                ✉
-              </span>
-              <a
-                href={`mailto:${t("header.email")}`}
-                className="hover:text-amber-300 transition-colors duration-200 break-all"
-              >
-                {t("header.email")}
-              </a>
-            </div>
+          <div className="space-y-2">
+            <a
+              href="tel:9930810555"
+              className="flex items-center gap-2.5 text-sm text-white hover:text-amber-400 transition-colors duration-150"
+            >
+              <span className="text-base leading-none">☎</span>
+              <span>{t("header.phoneLine")}</span>
+            </a>
+            <a
+              href={`mailto:${t("header.email")}`}
+              className="flex items-center gap-2.5 text-sm text-white hover:text-amber-400 transition-colors duration-150 break-all"
+            >
+              <span className="text-base leading-none flex-shrink-0">✉</span>
+              <span>{t("header.email")}</span>
+            </a>
           </div>
 
-          {/* Social icons */}
-          <div className="mt-5 flex gap-3">
-            {["YT", "FB", "IG", "X"].map((item) => (
-              <button
-                key={item}
-                aria-label={item}
-                className="w-8 h-8 rounded-md bg-white/5 border border-white/20 flex items-center justify-center text-[11px] font-semibold tracking-[0.12em] shadow-sm hover:border-amber-300 hover:text-amber-300 hover:-translate-y-0.5 hover:shadow-[0_0_18px_rgba(251,191,36,0.8)] transition-all duration-200"
-              >
-                {item}
-              </button>
-            ))}
+          {/* Social */}
+          <div className="flex gap-2 pt-1">
+            <SocialIcon label="YT" />
+            <SocialIcon label="FB" />
+            <SocialIcon label="IG" />
+            <SocialIcon label="X" />
           </div>
         </div>
 
-        {/* Courses & Training */}
+        {/* ── Courses column ── */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="h-6 w-1 rounded-full bg-amber-400" />
-            <h3 className="text-xs font-semibold tracking-[0.2em] uppercase">
-              {t("footer.coursesTitle")}
-            </h3>
-          </div>
-          <ul className="space-y-2 text-xs sm:text-sm text-white/80">
+          <SectionHeading accent="amber">{t("footer.coursesTitle")}</SectionHeading>
+          <ul className="space-y-2.5">
             {[
               t("footer.courses.police"),
               t("footer.courses.army"),
@@ -131,102 +152,59 @@ const Footer = () => {
               t("footer.courses.fitness"),
               t("footer.courses.allPhysical"),
             ].map((item) => (
-              <li key={item}>
-                <span className="group inline-flex items-center gap-2">
-                  <span className="h-[2px] w-3 rounded-full bg-white/40 transition-all duration-200 group-hover:w-5 group-hover:bg-amber-400" />
-                  <span className="group-hover:text-amber-200 transition-colors duration-200">
-                    {item}
-                  </span>
-                </span>
+              <li
+                key={item}
+                className="text-sm text-white hover:text-amber-400 transition-colors duration-150 cursor-pointer leading-relaxed"
+              >
+                {item}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Quick Links */}
+        {/* ── Quick Links column ── */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="h-6 w-1 rounded-full bg-amber-400" />
-            <h3 className="text-xs font-semibold tracking-[0.2em] uppercase">
-              {t("footer.quickLinksTitle")}
-            </h3>
-          </div>
-          <ul className="space-y-2 text-xs sm:text-sm">
+          <SectionHeading accent="amber">{t("footer.quickLinksTitle")}</SectionHeading>
+          <ul className="space-y-2.5">
             {quickLinks.map((link) => (
-              <li key={link.nameKey}>
-                <Link
-                  to={link.href}
-                  className="group inline-flex items-center gap-2 text-white/80"
-                >
-                  <span className="h-[2px] w-3 rounded-full bg-white/40 transition-all duration-200 group-hover:w-5 group-hover:bg-amber-400" />
-                  <span className="group-hover:text-amber-200 transition-colors duration-200">
-                    {t(link.nameKey)}
-                  </span>
-                </Link>
-              </li>
+              <NavLink key={link.nameKey} to={link.href}>
+                {t(link.nameKey)}
+              </NavLink>
             ))}
           </ul>
         </div>
 
-        {/* Branches */}
-        <div className="md:col-span-2 lg:col-span-1 grid grid-cols-2 gap-6">
+        {/* ── Branches column ── */}
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-1 lg:grid-cols-1">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="h-6 w-1 rounded-full bg-emerald-400" />
-              <h3 className="text-xs font-semibold tracking-[0.2em] uppercase">
-                {t("footer.branchesTitle")}
-              </h3>
-            </div>
-            <ul className="space-y-2 text-xs sm:text-sm">
+            <SectionHeading accent="emerald">{t("footer.branchesTitle")}</SectionHeading>
+            <ul className="space-y-2.5">
               {branchesLeft.map((branch) => (
-                <li key={branch.name}>
-                  <Link
-                    to={branch.href}
-                    className="group flex items-center gap-2 text-white/80"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-white/35 group-hover:bg-emerald-400 transition-colors duration-200" />
-                    <span className="group-hover:text-emerald-200 transition-colors duration-200">
-                      {branch.name}
-                    </span>
-                  </Link>
-                </li>
+                <NavLink key={branch.name} to={branch.href} color="emerald">
+                  {branch.name}
+                </NavLink>
               ))}
             </ul>
           </div>
 
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="h-6 w-1 rounded-full bg-emerald-400" />
-              <h3 className="text-xs font-semibold tracking-[0.2em] uppercase">
-                {t("footer.moreBranchesTitle")}
-              </h3>
-            </div>
-            <ul className="space-y-2 text-xs sm:text-sm">
+            <SectionHeading accent="emerald">{t("footer.moreBranchesTitle")}</SectionHeading>
+            <ul className="space-y-2.5">
               {branchesRight.map((branch) => (
-                <li key={branch.name}>
-                  <Link
-                    to={branch.href}
-                    className="group flex items-center gap-2 text-white/80"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-white/35 group-hover:bg-emerald-400 transition-colors duration-200" />
-                    <span className="group-hover:text-emerald-200 transition-colors duration-200">
-                      {branch.name}
-                    </span>
-                  </Link>
-                </li>
+                <NavLink key={branch.name} to={branch.href} color="emerald">
+                  {branch.name}
+                </NavLink>
               ))}
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10 bg-black">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px] text-white/50">
+      {/* ── Bottom bar ── */}
+      <div className="border-t border-white/[0.07]">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/70">
           <p>{t("footer.bottomLine")}</p>
-          <p className="flex flex-wrap gap-2 items-center text-right">
-            <span>{t("footer.bottomSubtitle")}</span>
-          </p>
+          <p>{t("footer.bottomSubtitle")}</p>
         </div>
       </div>
     </footer>

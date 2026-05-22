@@ -82,7 +82,7 @@ function Header() {
 
   return (
     <header className="w-full bg-white border-b border-gray-200 relative z-30">
-      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4">
+      <div className=" mx-auto px-4">
         {/* Top row: logo + academy + contact + hamburger */}
         <div className="flex items-center justify-between gap-2 py-2">
           {/* Logo + name */}
@@ -224,20 +224,20 @@ function Header() {
               </div>
 
               {/* Social icons */}
-              <div className="flex items-center gap-2 text-gray-700">
+              <div className="flex items-center gap-2 text-black">
                 <a
                   href="https://www.youtube.com/@yourchannel"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-orange-600"
+                  className=" p-1 hover:bg-gray-100 rounded-lg"
                 >
-                  <YoutubeIcon className="w-4 h-4" />
+                  <YoutubeIcon className="w-5 h-5" />
                 </a>
                 <a
                   href="https://www.instagram.com/prahar_career_academy_"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-orange-600"
+                  className="p-1 hover:bg-gray-100 rounded-lg"
                 >
                   <InstagramIcon className="w-4 h-4" />
                 </a>
@@ -245,7 +245,7 @@ function Header() {
                   href="https://www.facebook.com/groups/422214769566819/?ref=share&mibextid=NSMWBT"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-orange-600"
+                  className="p-1 hover:bg-gray-100 rounded-lg"
                 >
                   <Facebook className="w-4 h-4" />
                 </a>
@@ -253,7 +253,7 @@ function Header() {
                   href="https://www.praharacademycenter.in"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-orange-600"
+                  className="p-1 hover:bg-gray-100 rounded-lg"
                 >
                   <Chrome className="w-4 h-4" />
                 </a>
@@ -415,14 +415,14 @@ function Header() {
         {/* Orange nav strip – desktop only */}
         <div
           ref={desktopMenuRef}
-          className="mb-1 rounded-3xl bg-orange-700 text-white shadow-sm hidden md:block"
+          className="mb-1 bg-orange-700 text-white shadow-sm hidden md:block"
         >
-          <nav className="flex flex-wrap items-center justify-between gap-3 px-4 py-2">
+          <nav className="flex flex-wrap items-center justify-between gap-3 px-4 py-1">
             <span className="text-[11px] uppercase tracking-[0.28em] text-orange-100">
               {t("nav.trainingDisciplineSelection")}
             </span>
 
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm sm:text-base font-semibold">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm sm:text-base ">
               {/* HOME */}
               <Link
                 to={refArr["Home"]}

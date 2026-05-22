@@ -1,14 +1,117 @@
 // src/pages/Enquiry.jsx
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 import HeroImg from "../../assets/image.png";
+
+const stationGroups = {
+  western: [
+    "Churchgate", "Marine Lines", "Charni Road", "Grant Road", "Mumbai Central",
+    "Mahalaxmi", "Lower Parel", "Prabhadevi", "Dadar", "Matunga Road",
+    "Mahim Junction", "Bandra", "Khar Road", "Santacruz", "Vile Parle",
+    "Andheri", "Jogeshwari", "Ram Mandir", "Goregaon", "Malad",
+    "Kandivali", "Borivali", "Dahisar", "Mira Road", "Bhayandar",
+    "Naigaon", "Vasai Road", "Nalasopara", "Virar"
+  ],
+  central: [
+    "Chhatrapati Shivaji Maharaj Terminus", "Masjid", "Sandhurst Road", "Byculla",
+    "Chinchpokli", "Currey Road", "Parel", "Dadar", "Matunga", "Sion",
+    "Kurla", "Vidyavihar", "Ghatkopar", "Vikhroli", "Kanjurmarg",
+    "Bhandup", "Nahur", "Mulund", "Thane", "Kalwa", "Mumbra",
+    "Diva", "Kopar", "Dombivli", "Thakurli", "Kalyan", "Shahad",
+    "Ambivli", "Titwala", "Khadavli", "Badlapur"
+  ],
+  harbour: [
+    "Chhatrapati Shivaji Maharaj Terminus", "Masjid", "Sandhurst Road",
+    "Dockyard Road", "Reay Road", "Cotton Green", "Sewri", "Wadala Road",
+    "Guru Tegh Bahadur Nagar", "Chunabhatti", "Kurla", "Tilak Nagar",
+    "Chembur", "Govandi", "Mankhurd", "Vashi", "Sanpada", "Juinagar",
+    "Nerul", "Seawoods-Darave", "Belapur CBD", "Kharghar", "Mansarovar",
+    "Khandeshwar", "Panvel"
+  ],
+  transharbour: [
+    "Panvel", "Khandeshwar", "Mansarovar", "Kharghar", "Belapur CBD",
+    "Seawoods-Darave", "Nerul", "Juinagar", "Sanpada", "Vashi",
+    "Airoli", "Rabale", "Ghansoli", "Koparkhairne", "Turbhe",
+    "Kille Ghodbunder Road", "Thane"
+  ],
+  metro: [
+    "Ghatkopar", "Asalpha", "Jagruti Nagar", "Mulund", "Mithagar",
+    "Shivaji Chowk", "Hemanth Krupa Chowk", "Raypurkar Chowk",
+    "Netaji Nagar", "Parkway", "Shewale Nagar", "Kasarvadavali",
+    "Kapur Bawdi", "Mukundwadi", "Teen Hath Naka", "Thane B.P.",
+    "Thane West", "Waghbil", "Majiwada", "Kasturi Park",
+    "Bangur Nagar", "Pushpa Park", "Balkum", "Shivaji Nagar",
+    "Vishnu Nagar"
+  ],
+  monorail: [
+    "Chembur", "VNP & RC Marg", "Sion", "Chunnabhatti", "Mumbai Fire Brigade",
+    "Dharavi", "Sindhi Society", "Fergusson Nagar", "Ravindra Natya Mandir",
+    "Currey Road", "Lower Parel", "Mahalaxmi", "Griha Nirman",
+    "Jacob Circle", "Fernandez Nagar", "Takeoff Tower"
+  ]
+};
 
 const Enquiry = () => {
   const { t } = useTranslation("common");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    course: "",
+    location: "",
+    message: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const payload = {
+      fullName: formData.fullName?.trim(),
+      phone: formData.phone?.trim(),
+      email: formData.email?.trim().toLowerCase(),
+      course: formData.course?.trim(),
+      location: formData.location?.trim() || "",
+      message: formData.message?.trim()
+    };
+
+    try {
+      await axios.post("http://localhost:4000/api/v1/enquiries", payload, {
+        withCredentials: true
+      });
+
+      setSubmitted(true);
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        course: "",
+        location: "",
+        message: ""
+      });
+
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (error) {
+      alert("Failed to submit enquiry. Please try again.");
+      console.error("Enquiry submit error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#050509] text-gray-100">
-      {/* Hero banner */}
+    <div className="min-h-screen flex flex-col bg-[#050509] text-gray-100 text-justify">
+      {/* Hero section - UNCHANGED */}
       <section className="relative w-full h-52 md:h-64 lg:h-72 overflow-hidden">
         <img
           src={HeroImg}
@@ -34,150 +137,274 @@ const Enquiry = () => {
         </div>
       </section>
 
-      {/* Main content */}
-      <main className="flex-1">
-        <section className="relative py-10 md:py-14">
-          <div className="pointer-events-none absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_top,_#facc15_0,_transparent_55%),radial-gradient(circle_at_bottom,_#22d3ee_0,_transparent_55%)]" />
+      {/* WHITE SECTION AFTER HERO - like Gallery + courses.jsx cards */}
+      <main className="flex-1 bg-white text-gray-900">
+        <section className="relative py-12 md:py-16">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_top,_#fef3c7_0,_transparent_60%),radial-gradient(circle_at_bottom,_#dbeafe_0,_transparent_60%)]" />
 
-          <div className="relative max-w-5xl mx-auto px-4 space-y-6">
-            {/* Enquiry card */}
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.55)] p-6 md:p-8">
-              <h2 className="text-lg md:text-xl font-semibold text-yellow-300 mb-1">
+          <div className="relative max-w-5xl mx-auto px-4 space-y-8 md:space-y-10">
+            {/* Main Enquiry Form Card - like courses.jsx */}
+            <div className="backdrop-blur-xl bg-white/95 border border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 md:p-8">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
                 {t("enquiryPage.form.title")}
               </h2>
-              <p className="text-xs md:text-sm text-gray-200 mb-6">
+              <p className="text-sm md:text-base text-gray-600 mb-6">
                 {t("enquiryPage.form.subtitle")}
               </p>
 
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1">
-                    {t("enquiryPage.form.fullNameLabel")}
-                  </label>
-                  <input
-                    type="text"
-                    placeholder={t("enquiryPage.form.fullNamePlaceholder")}
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-gray-100 placeholder-gray-400 outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
-                  />
+              {submitted ? (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 bg-green-100 border-2 border-green-300 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg
+                      className="w-10 h-10 text-green-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-semibold text-green-600 mb-3">
+                    ✅ Enquiry Submitted Successfully!
+                  </h3>
+                  <p className="text-lg text-gray-700">
+                    Our team will contact you within 24 hours.
+                  </p>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-1">
-                      {t("enquiryPage.form.mobileLabel")}
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t("enquiryPage.form.fullNameLabel")}
                     </label>
                     <input
-                      type="tel"
-                      placeholder={t("enquiryPage.form.mobilePlaceholder")}
-                      className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-gray-100 placeholder-gray-400 outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      required
+                      placeholder={t("enquiryPage.form.fullNamePlaceholder")}
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
                     />
                   </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t("enquiryPage.form.mobileLabel")}
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        placeholder={t("enquiryPage.form.mobilePlaceholder")}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t("enquiryPage.form.emailLabel")}
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder={t("enquiryPage.form.emailPlaceholder")}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Station Dropdown - Full dropdown kept */}
                   <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-1">
-                      {t("enquiryPage.form.emailLabel")}
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Location / City *
                     </label>
-                    <input
-                      type="email"
-                      placeholder={t("enquiryPage.form.emailPlaceholder")}
-                      className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-gray-100 placeholder-gray-400 outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
+                    <select
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      required
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all bg-white"
+                    >
+                      <option value="">Select your nearest station</option>
+                      
+                      <optgroup label="🟡 Western Line (28 stations)">
+                        {stationGroups.western.map((station) => (
+                          <option key={`western-${station}`} value={station}>
+                            {station}
+                          </option>
+                        ))}
+                      </optgroup>
+
+                      <optgroup label="🔵 Central Line (29 stations)">
+                        {stationGroups.central.map((station) => (
+                          <option key={`central-${station}`} value={station}>
+                            {station}
+                          </option>
+                        ))}
+                      </optgroup>
+
+                      <optgroup label="🟢 Harbour Line (22 stations)">
+                        {stationGroups.harbour.map((station) => (
+                          <option key={`harbour-${station}`} value={station}>
+                            {station}
+                          </option>
+                        ))}
+                      </optgroup>
+
+                      <optgroup label="🟠 Trans Harbour Line (16 stations)">
+                        {stationGroups.transharbour.map((station) => (
+                          <option key={`transharbour-${station}`} value={station}>
+                            {station}
+                          </option>
+                        ))}
+                      </optgroup>
+
+                      <optgroup label="🟣 Metro Line 4 (19 stations)">
+                        {stationGroups.metro.map((station) => (
+                          <option key={`metro-${station}`} value={station}>
+                            {station}
+                          </option>
+                        ))}
+                      </optgroup>
+
+                      <optgroup label="🟤 Mumbai Monorail (16 stations)">
+                        {stationGroups.monorail.map((station) => (
+                          <option key={`monorail-${station}`} value={station}>
+                            {station}
+                          </option>
+                        ))}
+                      </optgroup>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t("enquiryPage.form.courseLabel")}
+                    </label>
+                    <select
+                      name="course"
+                      value={formData.course}
+                      onChange={handleChange}
+                      required
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all bg-white"
+                    >
+                      <option value="">{t("enquiryPage.form.coursePlaceholder")}</option>
+                      <option value="Police Recruitment">{t("enquiryPage.form.coursePolice")}</option>
+                      <option value="Army Recruitment">{t("enquiryPage.form.courseArmy")}</option>
+                      <option value="SSC">{t("enquiryPage.form.courseSSC")}</option>
+                      <option value="Physical Training">{t("enquiryPage.form.coursePhysical")}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t("enquiryPage.form.messageLabel")}
+                    </label>
+                    <textarea
+                      name="message"
+                      rows="4"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder={t("enquiryPage.form.messagePlaceholder")}
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all resize-none"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1">
-                    {t("enquiryPage.form.courseLabel")}
-                  </label>
-                  <select className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-gray-100 outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400">
-                    <option className="bg-gray-900">
-                      {t("enquiryPage.form.coursePlaceholder")}
-                    </option>
-                    <option className="bg-gray-900">
-                      {t("enquiryPage.form.coursePolice")}
-                    </option>
-                    <option className="bg-gray-900">
-                      {t("enquiryPage.form.courseArmy")}
-                    </option>
-                    <option className="bg-gray-900">
-                      {t("enquiryPage.form.courseSSC")}
-                    </option>
-                    <option className="bg-gray-900">
-                      {t("enquiryPage.form.coursePhysical")}
-                    </option>
-                  </select>
-                </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="mt-4 w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-base"
+                  >
+                    {loading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin mr-3 inline-block" />
+                        {t("enquiryPage.form.submitting")}
+                      </>
+                    ) : (
+                      t("enquiryPage.form.submitButton")
+                    )}
+                  </button>
+                </form>
+              )}
 
-                <div>
-                  <label className="block text-xs font-medium text-gray-300 mb-1">
-                    {t("enquiryPage.form.messageLabel")}
-                  </label>
-                  <textarea
-                    rows="4"
-                    placeholder={t("enquiryPage.form.messagePlaceholder")}
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-gray-100 placeholder-gray-400 outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 px-4 py-2.5 text-sm font-semibold text-black shadow-[0_12px_30px_rgba(248,250,109,0.45)] hover:brightness-110 active:scale-[0.98] transition"
-                >
-                  {t("enquiryPage.form.submitButton")}
-                </button>
-              </form>
-
-              <p className="mt-3 text-[11px] text-gray-400">
+              <p className="mt-6 text-xs text-gray-500 text-center">
                 {t("enquiryPage.form.disclaimer")}
               </p>
             </div>
 
-            {/* Why enquire + Head Office */}
+            {/* 2-column info cards - like courses.jsx */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="rounded-2xl bg-gradient-to-b from-yellow-500/10 via-black/60 to-black/80 p-5">
-                <h3 className="text-sm font-semibold text-yellow-300 mb-3">
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
                   {t("enquiryPage.why.title")}
                 </h3>
-                <ul className="space-y-2 text-xs text-gray-100">
-                  <li>{t("enquiryPage.why.l1")}</li>
-                  <li>{t("enquiryPage.why.l2")}</li>
-                  <li>{t("enquiryPage.why.l3")}</li>
-                  <li>{t("enquiryPage.why.l4")}</li>
-                  <li>{t("enquiryPage.why.l5")}</li>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    {t("enquiryPage.why.l1")}
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    {t("enquiryPage.why.l2")}
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    {t("enquiryPage.why.l3")}
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    {t("enquiryPage.why.l4")}
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    {t("enquiryPage.why.l5")}
+                  </li>
                 </ul>
               </div>
 
-              <div className="rounded-2xl bg-black/70 border border-white/10 p-5 text-xs text-gray-200 space-y-2">
-                <h4 className="text-sm font-semibold text-white mb-1">
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <h4 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
                   {t("enquiryPage.office.title")}
                 </h4>
-                <p>{t("enquiryPage.office.address")}</p>
-                <p className="mt-1">
-                  <span className="font-semibold text-yellow-300">
+                <p className="text-sm text-gray-700 mb-3">{t("enquiryPage.office.address")}</p>
+                <p className="text-sm">
+                  <span className="font-semibold text-yellow-600">
                     {t("enquiryPage.office.callLabel")}
                   </span>{" "}
                   {t("enquiryPage.office.callValue")}
                 </p>
-                <p>
-                  <span className="font-semibold text-yellow-300">
+                <p className="text-sm mt-1">
+                  <span className="font-semibold text-yellow-600">
                     {t("enquiryPage.office.emailLabel")}
                   </span>{" "}
-                  <a href="mailto:prahar_career_academy_@gmail.com">
+                  <a href="mailto:prahar_career_academy_@gmail.com" className="text-yellow-600 hover:text-yellow-700 underline">
                     {t("header.email")}
                   </a>
                 </p>
               </div>
             </div>
 
-            {/* Marathi + English test boxes */}
+            {/* Test info cards - 2-column */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="backdrop-blur-xl bg-black/60 border border-white/10 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.55)] p-5 md:p-6 space-y-3">
-                <h3 className="text-sm md:text-base font-semibold text-yellow-300">
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
                   {t("enquiryPage.tests.marathi.title")}
-                  <span className="block text-[11px] md:text-xs text-gray-300">
+                  <span className="block text-sm text-gray-600 mt-1">
                     {t("enquiryPage.tests.marathi.subtitle")}
                   </span>
                 </h3>
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-gray-200">
+                <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
                   <li>{t("enquiryPage.tests.marathi.l1")}</li>
                   <li>{t("enquiryPage.tests.marathi.l2")}</li>
                   <li>{t("enquiryPage.tests.marathi.l3")}</li>
@@ -185,20 +412,20 @@ const Enquiry = () => {
                   <li>{t("enquiryPage.tests.marathi.l5")}</li>
                   <li>{t("enquiryPage.tests.marathi.l6")}</li>
                 </ul>
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-yellow-300">
+                <ul className="list-disc list-inside space-y-2 text-sm text-yellow-600 mt-3">
                   <li>{t("enquiryPage.tests.marathi.extra1")}</li>
                   <li>{t("enquiryPage.tests.marathi.extra2")}</li>
                 </ul>
               </div>
 
-              <div className="backdrop-blur-xl bg-black/60 border border-white/10 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.55)] p-5 md:p-6 space-y-3">
-                <h3 className="text-sm md:text-base font-semibold text-yellow-300">
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
                   {t("enquiryPage.tests.english.title")}
-                  <span className="block text-[11px] md:text-xs text-gray-300">
+                  <span className="block text-sm text-gray-600 mt-1">
                     {t("enquiryPage.tests.english.subtitle")}
                   </span>
                 </h3>
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-gray-200">
+                <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
                   <li>{t("enquiryPage.tests.english.l1")}</li>
                   <li>{t("enquiryPage.tests.english.l2")}</li>
                   <li>{t("enquiryPage.tests.english.l3")}</li>
@@ -206,7 +433,7 @@ const Enquiry = () => {
                   <li>{t("enquiryPage.tests.english.l5")}</li>
                   <li>{t("enquiryPage.tests.english.l6")}</li>
                 </ul>
-                <ul className="list-disc list-inside space-y-1.5 text-[11px] md:text-xs text-yellow-300">
+                <ul className="list-disc list-inside space-y-2 text-sm text-yellow-600 mt-3">
                   <li>{t("enquiryPage.tests.english.extra1")}</li>
                   <li>{t("enquiryPage.tests.english.extra2")}</li>
                 </ul>

@@ -1,8 +1,8 @@
 // src/components/ForcesLogoStrip.jsx
 import React from "react";
-import logo1 from "../assets/ContactUs.jpeg";
-import logo2 from "../assets/Director_Photo_Desk.png";
-import logo3 from "../assets/Director_Photo_.png";
+import logo1 from "../assets/Indian_Army_Logo.svg.png";
+import logo2 from "../assets/BSF_Logo.svg.png";
+import logo3 from "../assets/Indian_Air_Force_Logo.png";
 import logo4 from "../assets/image.png";
 import logo5 from "../assets/Logo.jpg";
 import logo6 from "../assets/Vishal_Trainer.jpeg";
