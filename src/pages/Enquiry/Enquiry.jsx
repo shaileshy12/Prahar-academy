@@ -1,55 +1,25 @@
-// src/pages/Enquiry.jsx
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import HeroImg from "../../assets/image.png";
 
-const stationGroups = {
-  western: [
-    "Churchgate", "Marine Lines", "Charni Road", "Grant Road", "Mumbai Central",
-    "Mahalaxmi", "Lower Parel", "Prabhadevi", "Dadar", "Matunga Road",
-    "Mahim Junction", "Bandra", "Khar Road", "Santacruz", "Vile Parle",
-    "Andheri", "Jogeshwari", "Ram Mandir", "Goregaon", "Malad",
-    "Kandivali", "Borivali", "Dahisar", "Mira Road", "Bhayandar",
-    "Naigaon", "Vasai Road", "Nalasopara", "Virar"
-  ],
-  central: [
-    "Chhatrapati Shivaji Maharaj Terminus", "Masjid", "Sandhurst Road", "Byculla",
-    "Chinchpokli", "Currey Road", "Parel", "Dadar", "Matunga", "Sion",
-    "Kurla", "Vidyavihar", "Ghatkopar", "Vikhroli", "Kanjurmarg",
-    "Bhandup", "Nahur", "Mulund", "Thane", "Kalwa", "Mumbra",
-    "Diva", "Kopar", "Dombivli", "Thakurli", "Kalyan", "Shahad",
-    "Ambivli", "Titwala", "Khadavli", "Badlapur"
-  ],
-  harbour: [
-    "Chhatrapati Shivaji Maharaj Terminus", "Masjid", "Sandhurst Road",
-    "Dockyard Road", "Reay Road", "Cotton Green", "Sewri", "Wadala Road",
-    "Guru Tegh Bahadur Nagar", "Chunabhatti", "Kurla", "Tilak Nagar",
-    "Chembur", "Govandi", "Mankhurd", "Vashi", "Sanpada", "Juinagar",
-    "Nerul", "Seawoods-Darave", "Belapur CBD", "Kharghar", "Mansarovar",
-    "Khandeshwar", "Panvel"
-  ],
-  transharbour: [
-    "Panvel", "Khandeshwar", "Mansarovar", "Kharghar", "Belapur CBD",
-    "Seawoods-Darave", "Nerul", "Juinagar", "Sanpada", "Vashi",
-    "Airoli", "Rabale", "Ghansoli", "Koparkhairne", "Turbhe",
-    "Kille Ghodbunder Road", "Thane"
-  ],
-  metro: [
-    "Ghatkopar", "Asalpha", "Jagruti Nagar", "Mulund", "Mithagar",
-    "Shivaji Chowk", "Hemanth Krupa Chowk", "Raypurkar Chowk",
-    "Netaji Nagar", "Parkway", "Shewale Nagar", "Kasarvadavali",
-    "Kapur Bawdi", "Mukundwadi", "Teen Hath Naka", "Thane B.P.",
-    "Thane West", "Waghbil", "Majiwada", "Kasturi Park",
-    "Bangur Nagar", "Pushpa Park", "Balkum", "Shivaji Nagar",
-    "Vishnu Nagar"
-  ],
-  monorail: [
-    "Chembur", "VNP & RC Marg", "Sion", "Chunnabhatti", "Mumbai Fire Brigade",
-    "Dharavi", "Sindhi Society", "Fergusson Nagar", "Ravindra Natya Mandir",
-    "Currey Road", "Lower Parel", "Mahalaxmi", "Griha Nirman",
-    "Jacob Circle", "Fernandez Nagar", "Takeoff Tower"
-  ]
+const calculateAge = (dob) => {
+  if (!dob) return "";
+  const birthDate = new Date(dob);
+  if (Number.isNaN(birthDate.getTime())) return "";
+
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+  }
+
+  return age >= 0 ? String(age) : "";
 };
 
 const Enquiry = () => {
@@ -58,6 +28,10 @@ const Enquiry = () => {
     fullName: "",
     phone: "",
     email: "",
+    dob: "",
+    age: "",
+    caste: "",
+    height: "",
     course: "",
     location: "",
     message: ""
@@ -66,15 +40,29 @@ const Enquiry = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+
+    if (name === "dob") {
+      setFormData((prev) => ({
+        ...prev,
+        dob: value,
+        age: calculateAge(value)
+      }));
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Combine extra form fields into the message field to comply with the backend schema
+    const combinedMessage = `DOB: ${formData.dob || "N/A"}, Age: ${formData.age || "N/A"}, Caste: ${formData.caste || "N/A"}, Height: ${formData.height || "N/A"} | Note: ${formData.message?.trim() || "None"}`;
 
     const payload = {
       fullName: formData.fullName?.trim(),
@@ -82,11 +70,12 @@ const Enquiry = () => {
       email: formData.email?.trim().toLowerCase(),
       course: formData.course?.trim(),
       location: formData.location?.trim() || "",
-      message: formData.message?.trim()
+      message: combinedMessage
     };
 
     try {
-      await axios.post("http://localhost:4000/api/v1/enquiries", payload, {
+      // Updated the endpoint URL to match the defined backend route
+      await axios.post("http://localhost:4000/api/v1/user/enquiry", payload, {
         withCredentials: true
       });
 
@@ -95,6 +84,10 @@ const Enquiry = () => {
         fullName: "",
         phone: "",
         email: "",
+        dob: "",
+        age: "",
+        caste: "",
+        height: "",
         course: "",
         location: "",
         message: ""
@@ -111,7 +104,6 @@ const Enquiry = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#050509] text-gray-100 text-justify">
-      {/* Hero section - UNCHANGED */}
       <section className="relative w-full h-52 md:h-64 lg:h-72 overflow-hidden">
         <img
           src={HeroImg}
@@ -137,13 +129,11 @@ const Enquiry = () => {
         </div>
       </section>
 
-      {/* WHITE SECTION AFTER HERO - like Gallery + courses.jsx cards */}
       <main className="flex-1 bg-white text-gray-900">
         <section className="relative py-12 md:py-16">
           <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_top,_#fef3c7_0,_transparent_60%),radial-gradient(circle_at_bottom,_#dbeafe_0,_transparent_60%)]" />
 
           <div className="relative max-w-5xl mx-auto px-4 space-y-8 md:space-y-10">
-            {/* Main Enquiry Form Card - like courses.jsx */}
             <div className="backdrop-blur-xl bg-white/95 border border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 md:p-8">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
                 {t("enquiryPage.form.title")}
@@ -170,10 +160,10 @@ const Enquiry = () => {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-semibold text-green-600 mb-3">
-                    ✅ Enquiry Submitted Successfully!
+                    {t("enquiryPage.form.successTitle")}
                   </h3>
                   <p className="text-lg text-gray-700">
-                    Our team will contact you within 24 hours.
+                    {t("enquiryPage.form.successText")}
                   </p>
                 </div>
               ) : (
@@ -208,6 +198,7 @@ const Enquiry = () => {
                         className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
                       />
                     </div>
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         {t("enquiryPage.form.emailLabel")}
@@ -224,68 +215,78 @@ const Enquiry = () => {
                     </div>
                   </div>
 
-                  {/* Station Dropdown - Full dropdown kept */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Date of Birth *
+                      </label>
+                      <input
+                        type="date"
+                        name="dob"
+                        value={formData.dob}
+                        onChange={handleChange}
+                        required
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all bg-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Age
+                      </label>
+                      <input
+                        type="number"
+                        name="age"
+                        value={formData.age}
+                        readOnly
+                        placeholder="Auto-calculated from DOB"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 bg-gray-100 cursor-not-allowed focus:outline-none shadow-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Caste
+                      </label>
+                      <input
+                        type="text"
+                        name="caste"
+                        value={formData.caste}
+                        onChange={handleChange}
+                        placeholder="Enter your caste"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Height
+                      </label>
+                      <input
+                        type="text"
+                        name="height"
+                        value={formData.height}
+                        onChange={handleChange}
+                        placeholder={`For example: 5'7" or 170 cm`}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Location / City *
+                      {t("enquiryPage.form.locationLabel")}
                     </label>
-                    <select
+                    <input
+                      type="text"
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
-                      required
-                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all bg-white"
-                    >
-                      <option value="">Select your nearest station</option>
-                      
-                      <optgroup label="🟡 Western Line (28 stations)">
-                        {stationGroups.western.map((station) => (
-                          <option key={`western-${station}`} value={station}>
-                            {station}
-                          </option>
-                        ))}
-                      </optgroup>
-
-                      <optgroup label="🔵 Central Line (29 stations)">
-                        {stationGroups.central.map((station) => (
-                          <option key={`central-${station}`} value={station}>
-                            {station}
-                          </option>
-                        ))}
-                      </optgroup>
-
-                      <optgroup label="🟢 Harbour Line (22 stations)">
-                        {stationGroups.harbour.map((station) => (
-                          <option key={`harbour-${station}`} value={station}>
-                            {station}
-                          </option>
-                        ))}
-                      </optgroup>
-
-                      <optgroup label="🟠 Trans Harbour Line (16 stations)">
-                        {stationGroups.transharbour.map((station) => (
-                          <option key={`transharbour-${station}`} value={station}>
-                            {station}
-                          </option>
-                        ))}
-                      </optgroup>
-
-                      <optgroup label="🟣 Metro Line 4 (19 stations)">
-                        {stationGroups.metro.map((station) => (
-                          <option key={`metro-${station}`} value={station}>
-                            {station}
-                          </option>
-                        ))}
-                      </optgroup>
-
-                      <optgroup label="🟤 Mumbai Monorail (16 stations)">
-                        {stationGroups.monorail.map((station) => (
-                          <option key={`monorail-${station}`} value={station}>
-                            {station}
-                          </option>
-                        ))}
-                      </optgroup>
-                    </select>
+                      placeholder={t("enquiryPage.form.locationPlaceholder")}
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent shadow-sm hover:shadow-md transition-all"
+                    />
                   </div>
 
                   <div>
@@ -343,7 +344,6 @@ const Enquiry = () => {
               </p>
             </div>
 
-            {/* 2-column info cards - like courses.jsx */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
@@ -377,7 +377,9 @@ const Enquiry = () => {
                 <h4 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
                   {t("enquiryPage.office.title")}
                 </h4>
-                <p className="text-sm text-gray-700 mb-3">{t("enquiryPage.office.address")}</p>
+                <p className="text-sm text-gray-700 mb-3">
+                  {t("enquiryPage.office.address")}
+                </p>
                 <p className="text-sm">
                   <span className="font-semibold text-yellow-600">
                     {t("enquiryPage.office.callLabel")}
@@ -388,55 +390,13 @@ const Enquiry = () => {
                   <span className="font-semibold text-yellow-600">
                     {t("enquiryPage.office.emailLabel")}
                   </span>{" "}
-                  <a href="mailto:prahar_career_academy_@gmail.com" className="text-yellow-600 hover:text-yellow-700 underline">
+                  <a
+                    href={`mailto:${t("header.email")}`}
+                    className="text-yellow-600 hover:text-yellow-700 underline"
+                  >
                     {t("header.email")}
                   </a>
                 </p>
-              </div>
-            </div>
-
-            {/* Test info cards - 2-column */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
-                  {t("enquiryPage.tests.marathi.title")}
-                  <span className="block text-sm text-gray-600 mt-1">
-                    {t("enquiryPage.tests.marathi.subtitle")}
-                  </span>
-                </h3>
-                <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
-                  <li>{t("enquiryPage.tests.marathi.l1")}</li>
-                  <li>{t("enquiryPage.tests.marathi.l2")}</li>
-                  <li>{t("enquiryPage.tests.marathi.l3")}</li>
-                  <li>{t("enquiryPage.tests.marathi.l4")}</li>
-                  <li>{t("enquiryPage.tests.marathi.l5")}</li>
-                  <li>{t("enquiryPage.tests.marathi.l6")}</li>
-                </ul>
-                <ul className="list-disc list-inside space-y-2 text-sm text-yellow-600 mt-3">
-                  <li>{t("enquiryPage.tests.marathi.extra1")}</li>
-                  <li>{t("enquiryPage.tests.marathi.extra2")}</li>
-                </ul>
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
-                  {t("enquiryPage.tests.english.title")}
-                  <span className="block text-sm text-gray-600 mt-1">
-                    {t("enquiryPage.tests.english.subtitle")}
-                  </span>
-                </h3>
-                <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
-                  <li>{t("enquiryPage.tests.english.l1")}</li>
-                  <li>{t("enquiryPage.tests.english.l2")}</li>
-                  <li>{t("enquiryPage.tests.english.l3")}</li>
-                  <li>{t("enquiryPage.tests.english.l4")}</li>
-                  <li>{t("enquiryPage.tests.english.l5")}</li>
-                  <li>{t("enquiryPage.tests.english.l6")}</li>
-                </ul>
-                <ul className="list-disc list-inside space-y-2 text-sm text-yellow-600 mt-3">
-                  <li>{t("enquiryPage.tests.english.extra1")}</li>
-                  <li>{t("enquiryPage.tests.english.extra2")}</li>
-                </ul>
               </div>
             </div>
           </div>

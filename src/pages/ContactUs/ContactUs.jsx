@@ -1,68 +1,24 @@
-// src/pages/ContactUs.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
 import HeroTraining1 from "../../assets/img3.jpeg";
 import HeroTraining2 from "../../assets/army-image.jpg";
 import HeroGroup from "../../assets/ContactUs.jpeg";
 
-const branches = [
-  {
-    key: "borivali",
-    cityKey: "contact.branches.borivali.city",
-    nameKey: "contact.branches.borivali.name",
-    addressKey: "contact.branches.borivali.address",
-    phoneKey: "contact.branches.borivali.phone"
-  },
-  {
-    key: "thane",
-    cityKey: "contact.branches.thane.city",
-    nameKey: "contact.branches.thane.name",
-    addressKey: "contact.branches.thane.address",
-    phoneKey: "contact.branches.thane.phone"
-  },
-  {
-    key: "kalyan",
-    cityKey: "contact.branches.kalyan.city",
-    nameKey: "contact.branches.kalyan.name",
-    addressKey: "contact.branches.kalyan.address",
-    phoneKey: "contact.branches.kalyan.phone"
-  },
-  {
-    key: "ghatkopar",
-    cityKey: "contact.branches.ghatkopar.city",
-    nameKey: "contact.branches.ghatkopar.name",
-    addressKey: "contact.branches.ghatkopar.address",
-    phoneKey: "contact.branches.ghatkopar.phone"
-  },
-  {
-    key: "chembur",
-    cityKey: "contact.branches.chembur.city",
-    nameKey: "contact.branches.chembur.name",
-    addressKey: "contact.branches.chembur.address",
-    phoneKey: "contact.branches.chembur.phone"
-  },
-  {
-    key: "nalasopara",
-    cityKey: "contact.branches.nalasopara.city",
-    nameKey: "contact.branches.nalasopara.name",
-    addressKey: "contact.branches.nalasopara.address",
-    phoneKey: "contact.branches.nalasopara.phone"
-  },
-  {
-    key: "pen",
-    cityKey: "contact.branches.pen.city",
-    nameKey: "contact.branches.pen.name",
-    addressKey: "contact.branches.pen.address",
-    phoneKey: "contact.branches.pen.phone"
-  }
-];
-
 const ContactUs = () => {
   const { t } = useTranslation("common");
 
+  const contactCards = [
+    {
+      key: "borivali",
+      city: t("contact.branches.borivali.city"),
+      name: t("contact.branches.borivali.name"),
+      address: t("contact.branches.borivali.address"),
+      phone: t("contact.branches.borivali.phone")
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-[#050509] text-gray-100 flex flex-col">
-      {/* Hero section with training photos - unchanged */}
       <section className="relative w-full overflow-hidden bg-gradient-to-b from-black via-black/90 to-[#3e3e41]">
         <div className="max-w-6xl mx-auto px-4 pt-16 pb-10 md:pt-20 md:pb-14 grid grid-cols-1 lg:grid-cols-[1.1fr,1fr] gap-10 items-center">
           <div>
@@ -95,7 +51,7 @@ const ContactUs = () => {
               <img
                 src={HeroGroup}
                 alt={t("contact.heroImgAltGroup")}
-                className="w-full h-top object-cover"
+                className="w-full object-top"
               />
             </div>
             <div className="absolute left-10 top-0 w-28 sm:w-32 md:w-36 h-20 sm:h-24 md:h-28 rounded-2xl overflow-hidden border border-white/10 shadow-[0_12px_30px_rgba(0,0,0,0.8)]">
@@ -109,7 +65,6 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* White section after hero */}
       <main className="flex-1 bg-white text-gray-900">
         <section className="relative py-12 md:py-16">
           <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_top,_#fef3c7_0,_transparent_60%),radial-gradient(circle_at_bottom,_#dbeafe_0,_transparent_60%)]" />
@@ -120,30 +75,29 @@ const ContactUs = () => {
             </h2>
 
             <p className="text-center text-sm md:text-base text-gray-600 max-w-2xl mx-auto mb-10">
-              Reach out to the nearest Prahar Career Academy branch for admission
-              guidance, batch timings, and course details.
+              {t("contact.branchesSubtitle")}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 text-sm">
-              {branches.map((b) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 md:gap-8 text-sm max-w-2xl mx-auto">
+              {contactCards.map((b) => (
                 <div
                   key={b.key}
                   className="bg-white border border-gray-200 rounded-2xl px-6 py-6 shadow-md hover:shadow-xl transition-all duration-300"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-1 text-center">
-                    {t(b.cityKey)}
+                    {b.city}
                   </h3>
 
                   <p className="text-[13px] font-semibold text-gray-700 text-center mb-3 tracking-wide">
-                    {t(b.nameKey)}
+                    {b.name}
                   </p>
 
                   <p className="text-[13px] leading-relaxed text-gray-600 mb-4 text-center">
-                    {t(b.addressKey)}
+                    {b.address}
                   </p>
 
                   <p className="text-[15px] font-semibold text-yellow-600 text-center">
-                    ☎ {t(b.phoneKey)}
+                    ☎ {b.phone}
                   </p>
                 </div>
               ))}
@@ -168,4 +122,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default ContactUs;   

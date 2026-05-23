@@ -1,52 +1,46 @@
 // src/pages/AboutUs/AboutUs.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
-import CloudinaryVideo from "../../components/CloudinaryVideo";
 
 const AboutUs = () => {
   const { t } = useTranslation("common");
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900 text-justify">
-
-      {/* ── Hero section — UNCHANGED ── */}
-      <section className="relative w-full bg-black overflow-hidden">
-        <CloudinaryVideo
-          publicId="VN20251202_170050_ycnxwc"
-          className="absolute inset-0 w-full object-cover opacity-100"
-        />
+    <div className="min-h-screen flex flex-col bg-white text-gray-900">
+      <section className="relative w-full overflow-hidden bg-gradient-to-b from-black via-slate-950/95 to-black">
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
         <div className="pointer-events-none absolute inset-0 opacity-45 bg-[radial-gradient(circle_at_top,_#facc15_0,_transparent_55%),radial-gradient(circle_at_bottom_right,_#22c55e_0,_transparent_55%)]" />
 
-        <div className="relative max-w-6xl mx-auto px-4 py-10 md:py-14 flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-1/2 text-white">
-            <div className="flex items-center gap-3 mb-3">
+        <div className="relative max-w-6xl mx-auto px-4 min-h-[340px] md:min-h-[400px] flex items-center py-16 md:py-20">
+          <div className="max-w-3xl text-left">
+            <div className="flex items-center gap-3 mb-4">
               <span className="h-7 w-1 rounded-full bg-amber-400" />
               <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-amber-300">
                 {t("site.name")}
               </p>
             </div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug mb-4">
+
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-white mb-5">
               {t("about.heroTitle")}{" "}
               <span className="text-amber-300">
                 {t("about.heroTitleHighlight")}
               </span>
             </h1>
-            <p className="text-sm md:text-base text-white/85 mb-4 text-justify md:leading-relaxed">
-              {t("about.heroText1")}
-            </p>
-            <p className="text-sm md:text-base text-white/75 text-justify md:leading-relaxed">
-              {t("about.heroText2")}
-            </p>
+
+            <div className="space-y-3 max-w-2xl">
+              <p className="text-sm md:text-base text-white/85 leading-relaxed text-left">
+                {t("about.heroText1")}
+              </p>
+              <p className="text-sm md:text-base text-white/75 leading-relaxed text-left">
+                {t("about.heroText2")}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Main About Content — WHITE BACKGROUND ── */}
       <main className="flex-1 bg-white">
         <section className="relative max-w-6xl mx-auto px-4 py-10 md:py-14">
-
-          {/* Page heading */}
           <div className="mb-8 md:mb-10 flex items-center justify-center gap-3">
             <span className="h-7 w-1 rounded-full bg-amber-500" />
             <div className="text-center">
@@ -59,15 +53,11 @@ const AboutUs = () => {
             </div>
           </div>
 
-          {/* Intro paragraph */}
           <p className="text-sm md:text-base text-gray-700 leading-relaxed md:leading-loose mb-6 text-justify">
             {t("about.intro")}
           </p>
 
-          {/* Two-column layout */}
           <div className="grid gap-10 lg:grid-cols-3 lg:items-start">
-
-            {/* Left: main story card */}
             <div className="lg:col-span-2 space-y-5 text-sm md:text-base text-gray-700 leading-relaxed md:leading-loose text-justify bg-gray-50 border border-gray-200 rounded-2xl p-5 md:p-6 shadow-sm">
               <p>{t("about.p1")}</p>
               <p>{t("about.p2")}</p>
@@ -80,7 +70,6 @@ const AboutUs = () => {
               <p>{t("about.p9")}</p>
             </div>
 
-            {/* Right: highlight box */}
             <aside className="bg-amber-50 border border-amber-300 rounded-2xl p-5 space-y-3 text-sm text-gray-800 shadow-sm">
               <h3 className="text-base md:text-lg font-semibold text-amber-700 mb-2">
                 {t("about.whyTitle")}
