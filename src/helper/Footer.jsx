@@ -1,4 +1,5 @@
 import React from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Logo from "../assets/Logo.jpg";
@@ -9,7 +10,7 @@ const quickLinks = [
   { nameKey: "footer.links.photo", href: "/gallery/photo" },
   { nameKey: "footer.links.video", href: "/gallery/video" },
   { nameKey: "footer.links.successStudent", href: "/success-student" },
-  { nameKey: "footer.links.enquiry", href: "/enquiry" },
+  { nameKey: "footer.links.enquiry", href: "/enquiry" }, 
 ];
 
 const SocialIcon = ({ label, href = "#" }) => (
@@ -96,10 +97,11 @@ const Footer = () => {
             </div>
 
             <div className="mt-5 flex gap-2">
-              <SocialIcon label="YT" />
-              <SocialIcon label="FB" />
-              <SocialIcon label="IG" />
-              <SocialIcon label="X" />
+              <SocialIcon label="YT" href="https://youtube.com/@jaihindphysical_academy?si=dhebBR8ovADcdcXJ"/>
+              <SocialIcon label="FB" href="https://www.facebook.com/share/18TqiF46m7/"/>
+              <SocialIcon label="IG" href="https://www.instagram.com/jaihindphysical_academy"/>
+              <SocialIcon label="WA" href="https://wa.me/919876543210"/>
+              <SocialIcon label="TG" href="#"/>
             </div>
           </div>
 

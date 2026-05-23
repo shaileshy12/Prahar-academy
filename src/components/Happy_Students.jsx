@@ -75,14 +75,14 @@ const Happy_Students = () => {
               </div>
 
               {/* Testimonial Area */}
-              <div className="h-[150px] md:h-[180px] flex items-center justify-center mb-6 overflow-hidden shrink-0">
+              <div className="h-[100px] md:h-[180px] flex items-center justify-center mb-6 overflow-hidden shrink-0">
                 <p className="text-gray-700 text-base md:text-lg leading-relaxed italic font-medium text-center overflow-hidden line-clamp-5 md:line-clamp-6">
                   "{student.testimonial}"
                 </p>
               </div>
 
               {/* Name + Role */}
-              <div className="mt-auto flex flex-col md:flex-row md:items-center gap-2 md:gap-6 justify-center pb-8 md:pb-10 shrink-0">
+              <div className="h-[120px] flex flex-col md:flex-row md:items-center gap-1 md:gap-6 justify-center pb-8 md:pb-10 shrink-0">
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                   {student.name}
                 </h3>

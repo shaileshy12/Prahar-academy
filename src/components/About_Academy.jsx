@@ -11,7 +11,8 @@ const About_Academy = () => {
         {/* Title */}
         <div className="text-center mb-12 md:mb-20">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-            {t("home.aboutAcademy.title")}
+            {t("home.aboutAcademy.title")} <br></br>
+            {t("home.aboutAcademy.Training")}
           </h1>
         </div>
 

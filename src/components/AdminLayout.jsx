@@ -42,7 +42,7 @@ const AdminLayout = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-            <h1 className="text-2xl font-bold text-gray-800">Prahar Admin</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Jai Hind's Admin Page</h1>
           </div>
           
           <button
@@ -71,7 +71,7 @@ const AdminLayout = () => {
             
             <Link 
               to="/admin/enquiries" 
-              className="flex items-center space-x-3 p-3 bg-[#556b2f]/10 text-[#556b2f] rounded-xl font-medium"
+              className="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-xl transition-colors"
               onClick={() => setSidebarOpen(false)}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

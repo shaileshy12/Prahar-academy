@@ -33,6 +33,7 @@
     },
     "aboutAcademy": {
       "title": "About Our Academy",
+      "Training":"(Only For Ground Practice)",
       "heading": "We Will Transform Your Dream Into Reality!!",
       "p1": "When you get your dream job it feels like you have achieved something significant in your life. You want to join police services or any armed forces like the military then Jai Hind Physical Academy is the best place to get the correct guidance.",
       "p2": "When it comes to government jobs success rate is too low. In every segment hard work can not help you alone. You need proper guidance and smart work to accomplish the required guidance and training that you would be able to get selected for the fitness test."
@@ -386,8 +387,8 @@
     "addressLine2": "(MHB Ground, oppo. Sailee College, near Fire Brigade Link Road, Gorai road)",
     "coursesTitle": "Courses & Training",
     "courses": {
-      "police": "Police Bharti Training", "army": "Army Bharti Training", "taarmy": "Territorial Army Bharti",
-      "sscgd": "SSC GD Training", "rpf": "RPF Physical Training", "fitness": "Fitness Physical Training", "allPhysical": "All Physical Training"
+      "police": "Police Bharti Ground Training", "army": "Army Bharti Ground Training", "taarmy": "Territorial Army Ground Training",
+      "sscgd": "SSC GD Ground Training", "rpf": "RPF Ground Training", "fitness": "Fitness Physical Training", "allPhysical": "All Physical Training"
     },
     "quickLinksTitle": "Quick Links",
     "links": {

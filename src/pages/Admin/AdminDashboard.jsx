@@ -120,7 +120,7 @@ const AdminDashboard = () => {
             Admin Dashboard
           </h1>
           <p className="text-xl text-gray-600 max-w-md">
-            Prahar Career Academy - Manage enquiries & users
+            Jai Hind Physical Academy - Manage enquiries & users
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">

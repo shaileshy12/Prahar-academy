@@ -1,4 +1,5 @@
-import { Chrome, Facebook, InstagramIcon, Mail, Phone, YoutubeIcon, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Send, Facebook, InstagramIcon, Mail, Phone, YoutubeIcon, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -94,17 +95,22 @@ function Header() {
               </span>
 
               <div className="flex items-center gap-1 text-black">
-                <a href="https://www.youtube.com/@yourchannel" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="YouTube">
+                <a href="https://youtube.com/@jaihindphysical_academy?si=dhebBR8ovADcdcXJ" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="YouTube">
                   <YoutubeIcon className="w-4 h-4" />
                 </a>
-                <a href="https://www.instagram.com/prahar_career_academy_" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Instagram">
+                <a href="https://www.instagram.com/jaihindphysical_academy" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Instagram">
                   <InstagramIcon className="w-4 h-4" />
                 </a>
-                <a href="https://www.facebook.com/groups/422214769566819/?ref=share&mibextid=NSMWBT" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/18TqiF46m7/" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Facebook">
                   <Facebook className="w-4 h-4" />
                 </a>
-                <a href="https://www.praharacademycenter.in" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Website">
-                  <Chrome className="w-4 h-4" />
+
+                 <a href="#" target="_blank" target= "_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Telegram">
+                  <Send className="w-4 h-4" />
+                </a>
+
+                  <a href="https://wa.me/919082546363" target="_blank" rel="noreferrer" className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="WhatsApp">
+                  <FaWhatsapp className="w-4 h-4" />
                 </a>
 
                 <LanguageSwitcher />
@@ -186,19 +192,19 @@ function Header() {
                     <div className="absolute left-0 mt-2 w-64 rounded-lg bg-white text-black shadow-xl z-40">
                       <div className="flex flex-col py-2 text-sm">
                         <Link to={prefix + "/courses#police"} onClick={() => setOpenDesktopMenu(null)} className="px-4 py-1 hover:bg-orange-50 hover:text-orange-700">
-                          Police Bharti Training
+                          Police Bharti Ground Training
                         </Link>
                         <Link to={prefix + "/courses#army"} onClick={() => setOpenDesktopMenu(null)} className="px-4 py-1 hover:bg-orange-50 hover:text-orange-700">
-                          Army Bharti Training
+                          Army Bharti Ground Training
                         </Link>
                         <Link to={prefix + "/courses#army"} onClick={() => setOpenDesktopMenu(null)} className="px-4 py-1 hover:bg-orange-50 hover:text-orange-700">
-                          Territorial Army Bharti
+                          Territorial Army Ground Training
                         </Link>
                         <Link to={prefix + "/courses#ssc"} onClick={() => setOpenDesktopMenu(null)} className="px-4 py-1 hover:bg-orange-50 hover:text-orange-700">
-                          SSC GD Training
+                          SSC GD Ground Training
                         </Link>
                         <Link to={prefix + "/courses#physical"} onClick={() => setOpenDesktopMenu(null)} className="px-4 py-1 hover:bg-orange-50 hover:text-orange-700">
-                          RPF Physical Training
+                          RPF Ground Training
                         </Link>
                         <Link to={prefix + "/courses#physical"} onClick={() => setOpenDesktopMenu(null)} className="px-4 py-1 hover:bg-orange-50 hover:text-orange-700">
                           Fitness Physical Training

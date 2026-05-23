@@ -39,12 +39,12 @@ const AdminLogin = () => {
         recoveryKey: formData.recoveryKey
       });
       if (res.data.success) {
-        alert("✅ Password reset! You can now log in.");
+        alert("Password reset! You can now log in.");
         setIsResetMode(false); // Flip back to login mode
         setFormData({ ...formData, password: "", recoveryKey: "" });
       }
     } catch (error) {
-      alert("❌ " + (error.response?.data?.message || "Reset failed"));
+      alert((error.response?.data?.message || "Reset failed"));
     } finally {
       setLoading(false);
     }
