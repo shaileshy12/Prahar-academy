@@ -1,42 +1,71 @@
 // src/components/Happy_Students.jsx
+
 import React, { useState, useEffect } from "react";
+
 import { useTranslation } from "react-i18next";
+
 import SandeshImg from "../assets/Sandesh1.png";
+
 import KalpeshImg from "../assets/kapesh.png";
+
 import KaranImg from "../assets/Karan.jpg";
+
 import AkshayImg from "../assets/Akshay.jpg";
 
 const Happy_Students = () => {
-  const { t, i18n } = useTranslation("common");
+  // ================= TRANSLATION =================
+
+  const { t, i18n } = useTranslation("home");
+
+  // ================= STATE =================
+
   const [currentStudent, setCurrentStudent] = useState(0);
 
-  // Student array using translation keys
+  // ================= STUDENTS =================
+
   const students = [
     {
       name: "Sandesh Gaikwad",
-      role: t("home.testimonials.s1.role"),
+
+      role: t("testimonials.s1.role"),
+
       photo: SandeshImg,
-      testimonial: t("home.testimonials.s1.text"),
+
+      testimonial: t("testimonials.s1.text"),
     },
+
     {
       name: "Kalpesh Sinde",
-      role: t("home.testimonials.s2.role"),
+
+      role: t("testimonials.s2.role"),
+
       photo: KalpeshImg,
-      testimonial: t("home.testimonials.s2.text"),
+
+      testimonial: t("testimonials.s2.text"),
     },
+
     {
       name: "Karan Karande",
-      role: t("home.testimonials.s3.role"),
+
+      role: t("testimonials.s3.role"),
+
       photo: KaranImg,
-      testimonial: t("home.testimonials.s3.text"),
+
+      testimonial: t("testimonials.s3.text"),
     },
+
     {
       name: "Akshay Surwade",
-      role: t("home.testimonials.s4.role"),
+
+      role: t("testimonials.s4.role"),
+
       photo: AkshayImg,
-      testimonial: t("home.testimonials.s4.text"),
+
+      testimonial: t("testimonials.s4.text"),
     },
   ];
+
+  // ================= AUTO SLIDER =================
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,23 +78,32 @@ const Happy_Students = () => {
   const student = students[currentStudent];
 
   return (
-    // key={i18n.language} triggers a clean re-render on language switch
-    <section key={i18n.language} className="w-full bg-gradient-to-b from-slate-50 to-white py-16 px-4">
+    <section
+      key={i18n.language}
+      className="w-full bg-gradient-to-b from-slate-50 to-white py-16 px-4"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center">
+          {/* ================= TITLE ================= */}
+
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-12">
-            {t("home.testimonials.title")}
+            {t("testimonials.title")}
           </h1>
 
-          <div
-            className="bg-white rounded-2xl shadow-xl border border-gray-200 w-full max-w-2xl h-[540px] md:h-[580px] mx-auto relative overflow-hidden flex flex-col"
-          >
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg">
+          {/* ================= CARD ================= */}
+
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-200 w-full max-w-2xl min-h-[520px] md:min-h-[560px] mx-auto relative overflow-hidden flex flex-col">
+            {/* QUOTE ICON */}
+
+            <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg z-10">
               "
             </div>
 
-            <div className="px-8 md:px-12 pt-10 md:pt-12 flex flex-col h-full">
-              {/* Student Photo */}
+            {/* CONTENT */}
+
+            <div className="px-6 sm:px-8 md:px-12 pt-10 md:pt-12 flex flex-col flex-1">
+              {/* ================= PHOTO ================= */}
+
               <div className="flex justify-center mb-6 shrink-0">
                 <img
                   src={student.photo}
@@ -74,18 +112,25 @@ const Happy_Students = () => {
                 />
               </div>
 
-              {/* Testimonial Area */}
-              <div className="h-[100px] md:h-[180px] flex items-center justify-center mb-6 overflow-hidden shrink-0">
-                <p className="text-gray-700 text-base md:text-lg leading-relaxed italic font-medium text-center overflow-hidden line-clamp-5 md:line-clamp-6">
+              {/* ================= TESTIMONIAL ================= */}
+
+              <div className="min-h-[140px] md:min-h-[180px] flex items-center justify-center mb-6 shrink-0 px-1">
+                <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed italic font-medium text-center break-words">
                   "{student.testimonial}"
                 </p>
               </div>
 
-              {/* Name + Role */}
-              <div className="h-[120px] flex flex-col md:flex-row md:items-center gap-1 md:gap-6 justify-center pb-8 md:pb-10 shrink-0">
+              {/* ================= NAME + ROLE ================= */}
+
+              <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-6 justify-center pb-8 md:pb-10 mt-4">
+                {/* NAME */}
+
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                   {student.name}
                 </h3>
+
+                {/* ROLE */}
+
                 <span className="text-sm md:text-base text-yellow-600 font-semibold uppercase tracking-wide">
                   {student.role}
                 </span>
@@ -93,7 +138,8 @@ const Happy_Students = () => {
             </div>
           </div>
 
-          {/* Dots */}
+          {/* ================= DOTS ================= */}
+
           <div className="flex justify-center gap-2 mt-8">
             {students.map((_, index) => (
               <button

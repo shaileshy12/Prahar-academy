@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../../services/api";
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -11,19 +11,9 @@ function AdminUsers() {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("adminToken");
-
-      const res = await axios.get(
-        "http://localhost:4000/api/v1/admin/users",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
+      const res = await API.get(
+        `/api/v1/admin/users`,
       );
-
-      console.log(res.data);
 
       setUsers(res.data.data || []);
 

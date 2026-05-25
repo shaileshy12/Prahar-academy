@@ -1,17 +1,38 @@
+// src/helper/Footer.jsx
+
 import React from "react";
-import { FaWhatsapp } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
+
 import { useTranslation } from "react-i18next";
+
 import Logo from "../assets/Logo.jpg";
 
+// ================= QUICK LINKS =================
+
 const quickLinks = [
-  { nameKey: "footer.links.aboutUs", href: "/aboutus" },
-  { nameKey: "footer.links.directorDesk", href: "/director-desk" },
-  { nameKey: "footer.links.photo", href: "/gallery/photo" },
-  { nameKey: "footer.links.video", href: "/gallery/video" },
-  { nameKey: "footer.links.successStudent", href: "/success-student" },
-  { nameKey: "footer.links.enquiry", href: "/enquiry" }, 
+  {
+    nameKey: "links.aboutUs",
+    href: "/aboutus",
+  },
+
+  {
+    nameKey: "links.directorDesk",
+    href: "/director-desk",
+  },
+
+  {
+    nameKey: "links.successStudent",
+    href: "/success-students",
+  },
+
+  {
+    nameKey: "links.enquiry",
+    href: "/enquiry",
+  },
 ];
+
+// ================= SOCIAL ICON =================
 
 const SocialIcon = ({ label, href = "#" }) => (
   <a
@@ -25,14 +46,19 @@ const SocialIcon = ({ label, href = "#" }) => (
   </a>
 );
 
+// ================= SECTION HEADING =================
+
 const SectionHeading = ({ children }) => (
   <div className="mb-4">
     <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
       {children}
     </h3>
+
     <div className="mt-2 h-px w-10 bg-white/15" />
   </div>
 );
+
+// ================= NAV LINK =================
 
 const NavLink = ({ to, children }) => (
   <li>
@@ -45,13 +71,19 @@ const NavLink = ({ to, children }) => (
   </li>
 );
 
+// ================= FOOTER =================
+
 const Footer = () => {
-  const { t } = useTranslation("common");
+  // COMMON + FOOTER
+
+  const { t } = useTranslation(["common", "footer"]);
 
   return (
     <footer className="border-t border-white/10 bg-[#111111] text-white">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
+          {/* LEFT */}
+
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-black">
@@ -61,97 +93,125 @@ const Footer = () => {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="min-w-0">
-                <p className="text-base font-semibold leading-tight text-white">
+
+              <div>
+                <p className="text-base font-semibold text-white">
                   {t("site.name")}
                 </p>
+
                 <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/55">
                   {t("site.tagline")}
                 </p>
               </div>
             </div>
 
-            <p className="mt-5 max-w-xl leading-7 text-white">
-              {t("footer.headOffice")}
+            {/* ADDRESS */}
+
+            <p className="mt-5 text-white">{t("footer:headOffice")}</p>
+
+            <p className="text-sm text-white/70 leading-7">
+              {t("footer:addressLine1")}
             </p>
-            <p className="max-w-xl text-sm leading-7 text-white/70">
-              {t("footer.addressLine1")}
+
+            <p className="mt-2 text-sm text-white/70 leading-7">
+              {t("footer:addressLine2")}
             </p>
-            <p className="mt-2 max-w-xl text-sm leading-7 text-white/70">
-              {t("footer.addressLine2")}
-            </p>
+
+            {/* CONTACT */}
 
             <div className="mt-5 space-y-2">
               <a
                 href="tel:9930810555"
-                className="block text-sm text-white/75 transition-colors duration-150 hover:text-white"
+                className="block text-sm text-white/75 hover:text-white"
               >
                 {t("header.phoneLine")}
               </a>
+
               <a
                 href={`mailto:${t("header.email")}`}
-                className="block text-sm text-white/75 transition-colors duration-150 hover:text-white break-all"
+                className="block text-sm text-white/75 hover:text-white"
               >
                 {t("header.email")}
               </a>
             </div>
 
+            {/* SOCIAL */}
+
             <div className="mt-5 flex gap-2">
-              <SocialIcon label="YT" href="https://youtube.com/@jaihindphysical_academy?si=dhebBR8ovADcdcXJ"/>
-              <SocialIcon label="FB" href="https://www.facebook.com/share/18TqiF46m7/"/>
-              <SocialIcon label="IG" href="https://www.instagram.com/jaihindphysical_academy"/>
-              <SocialIcon label="WA" href="https://wa.me/919876543210"/>
-              <SocialIcon label="TG" href="#"/>
+              <SocialIcon
+                label="YT"
+                href="https://youtube.com/@jaihindphysical_academy"
+              />
+
+              <SocialIcon label="FB" href="https://www.facebook.com/share/18TqiF46m7/" />
+
+              <SocialIcon label="IG" href="https://www.instagram.com/jaihindphysical_academy" />
+
+              <SocialIcon label="WA" href="https://wa.me/919082546363" />
+              
+              <SocialIcon label="TG" href="https://t.me/jaihindphysicalacademy" />
+
+
             </div>
           </div>
 
+          {/* COURSES */}
+
           <div className="lg:col-span-3">
-            <SectionHeading>{t("footer.coursesTitle")}</SectionHeading>
+            <SectionHeading>{t("footer:coursesTitle")}</SectionHeading>
+
             <ul className="space-y-1">
               {[
-                t("footer.courses.police"),
-                t("footer.courses.army"),
-                t("footer.courses.taarmy"),
-                t("footer.courses.sscgd"),
-                t("footer.courses.rpf"),
-                t("footer.courses.fitness"),
-                t("footer.courses.allPhysical"),
+                t("footer:courses.police"),
+                t("footer:courses.army"),
+                t("footer:courses.taarmy"),
+                t("footer:courses.sscgd"),
+                t("footer:courses.rpf"),
+                t("footer:courses.fitness"),
+                t("footer:courses.allPhysical"),
               ].map((item) => (
-                <li
-                  key={item}
-                  className="text-sm leading-7 text-white/75"
-                >
+                <li key={item} className="text-sm leading-7 text-white/75">
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* QUICK LINKS */}
+
           <div className="lg:col-span-2">
-            <SectionHeading>{t("footer.quickLinksTitle")}</SectionHeading>
+            <SectionHeading>{t("footer:quickLinksTitle")}</SectionHeading>
+
             <ul className="space-y-1">
               {quickLinks.map((link) => (
                 <NavLink key={link.nameKey} to={link.href}>
-                  {t(link.nameKey)}
+                  {t(`footer:${link.nameKey}`)}
                 </NavLink>
               ))}
             </ul>
           </div>
 
+          {/* CONTACT */}
+
           <div className="lg:col-span-2">
             <SectionHeading>Contact</SectionHeading>
+
             <div className="space-y-2 text-sm leading-7 text-white/75">
               <p>{t("header.slogan")}</p>
-              <p>{t("footer.bottomSubtitle")}</p>
+
+              <p>{t("footer:bottomSubtitle")}</p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* BOTTOM */}
+
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>{t("footer.bottomLine")}</p>
-          <p>{t("footer.bottomSubtitle")}</p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-xs text-white/55 sm:flex-row sm:justify-between">
+          <p>{t("footer:bottomLine")}</p>
+
+          <p>{t("footer:bottomSubtitle")}</p>
         </div>
       </div>
     </footer>

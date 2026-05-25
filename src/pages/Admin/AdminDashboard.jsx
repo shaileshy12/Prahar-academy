@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../../services/api";
 import { Link } from "react-router-dom";
 import CloudinaryMedia from "../../components/CloudinaryMedia";
 
 const AdminDashboard = () => {
-
   const [stats, setStats] = useState({
     totalEnquiries: 0,
     pendingEnquiries: 0,
@@ -23,134 +22,82 @@ const AdminDashboard = () => {
   // ================= FETCH DASHBOARD STATS =================
 
   const fetchStats = async () => {
-
     setRefreshing(true);
 
     setError(null);
 
     try {
-
       const [enquiriesRes, usersRes] = await Promise.all([
+        API.get("/api/v1/admin/enquiries", { withCredentials: true }),
 
-        axios.get(
-          "http://localhost:4000/api/v1/admin/enquiries",
-          { withCredentials: true }
-        ),
-
-        axios.get(
-          "http://localhost:4000/api/v1/admin/users",
-          { withCredentials: true }
-        ),
-
+        API.get("/api/v1/admin/users", { withCredentials: true }),
       ]);
 
       const enquiries =
-        enquiriesRes.data.data ||
-        enquiriesRes.data.enquiries ||
-        [];
+        enquiriesRes.data.data || enquiriesRes.data.enquiries || [];
 
       const pending = enquiries.filter(
-        (e) =>
-          e.status?.toLowerCase() ===
-          "pending"
+        (e) => e.status?.toLowerCase() === "pending",
       ).length;
 
       const solved = enquiries.filter(
-        (e) =>
-          e.status?.toLowerCase() ===
-          "solved"
+        (e) => e.status?.toLowerCase() === "solved",
       ).length;
 
       setStats({
+        totalEnquiries: enquiries.length,
 
-        totalEnquiries:
-          enquiries.length,
+        pendingEnquiries: pending,
 
-        pendingEnquiries:
-          pending,
-
-        solvedEnquiries:
-          solved,
+        solvedEnquiries: solved,
 
         totalUsers:
-          usersRes.data.data?.length ||
-          usersRes.data.users?.length ||
-          0,
-
+          usersRes.data.data?.length || usersRes.data.users?.length || 0,
       });
-
     } catch (error) {
-
       console.log(error);
 
       setError(
-        error.response?.data?.message ||
-        "Failed to load dashboard stats"
+        error.response?.data?.message || "Failed to load dashboard stats",
       );
-
     } finally {
-
       setLoading(false);
 
       setRefreshing(false);
-
     }
   };
 
   // ================= FETCH GALLERY =================
 
   const fetchGalleryMedia = async () => {
-
     try {
+      const res = await API.get("/api/v1/user/gallery");
 
-      const res = await axios.get(
-        "http://localhost:4000/api/v1/user/gallery"
-      );
-
-      setGalleryMedia(
-        res.data.data?.slice(0, 4) || []
-      );
-
+      setGalleryMedia(res.data.data?.slice(0, 4) || []);
     } catch (error) {
-
       console.log(error);
-
     }
   };
 
   // ================= INITIAL LOAD =================
 
   useEffect(() => {
-
     fetchStats();
 
     fetchGalleryMedia();
-
   }, []);
 
   // ================= STATS CARD =================
 
-  const StatsCard = ({
-    icon: Icon,
-    title,
-    value,
-    color,
-  }) => (
-
+  const StatsCard = ({ icon: Icon, title, value, color }) => (
     <div className="group bg-white dark:bg-[#111827] p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-
       <div className="flex items-start justify-between">
-
         <div className="flex items-center gap-4">
-
           <div className={`p-3 rounded-2xl text-white shadow-lg ${color}`}>
-
             <Icon className="w-6 h-6" />
-
           </div>
 
           <div>
-
             <p className="text-sm font-medium text-gray-500 uppercase tracking-wide">
               {title}
             </p>
@@ -158,41 +105,25 @@ const AdminDashboard = () => {
             <p className="text-4xl font-bold text-gray-900 dark:text-white mt-1">
               {value}
             </p>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 
   // ================= QUICK ACTION CARD =================
 
-  const QuickActionCard = ({
-    icon: Icon,
-    title,
-    description,
-    href,
-    color,
-  }) => (
-
+  const QuickActionCard = ({ icon: Icon, title, description, href, color }) => (
     <Link
       to={href}
       className="group block p-6 bg-white dark:bg-[#111827] border border-gray-100 dark:border-gray-700 rounded-3xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-
       <div className="flex items-start gap-4">
-
         <div className={`p-3 rounded-2xl text-white shadow-lg ${color}`}>
-
           <Icon className="w-6 h-6" />
-
         </div>
 
         <div className="flex-1">
-
           <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-1">
             {title}
           </h3>
@@ -200,7 +131,6 @@ const AdminDashboard = () => {
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {description}
           </p>
-
         </div>
 
         <svg
@@ -209,49 +139,35 @@ const AdminDashboard = () => {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
             d="M17 8l4 4m0 0l-4 4m4-4H3"
           />
-
         </svg>
-
       </div>
-
     </Link>
   );
 
   // ================= LOADING =================
 
   if (loading) {
-
     return (
-
       <div className="min-h-[500px] flex flex-col items-center justify-center">
-
         <div className="w-16 h-16 border-4 border-[#556b2f]/20 border-t-[#556b2f] rounded-full animate-spin mb-5" />
 
-        <p className="text-gray-600 dark:text-gray-400">
-          Loading dashboard...
-        </p>
-
+        <p className="text-gray-600 dark:text-gray-400">Loading dashboard...</p>
       </div>
     );
   }
 
   return (
-
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
-
       {/* HEADER */}
 
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 mb-10">
-
         <div>
-
           <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#556b2f] to-gray-700 bg-clip-text text-transparent">
             Admin Dashboard
           </h1>
@@ -259,7 +175,6 @@ const AdminDashboard = () => {
           <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">
             Jai Hind Physical Academy - Manage enquiries & users
           </p>
-
         </div>
 
         <button
@@ -267,34 +182,21 @@ const AdminDashboard = () => {
           disabled={refreshing}
           className="px-6 py-3 bg-gradient-to-r from-[#556b2f] to-[#7f9f3f] text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
         >
-
-          {refreshing ? (
-            "Refreshing..."
-          ) : (
-            "Refresh Stats"
-          )}
-
+          {refreshing ? "Refreshing..." : "Refresh Stats"}
         </button>
-
       </div>
 
       {/* ERROR */}
 
       {error && (
-
         <div className="bg-red-50 border border-red-200 rounded-3xl p-5 mb-8">
-
-          <p className="text-red-600 font-medium">
-            {error}
-          </p>
-
+          <p className="text-red-600 font-medium">{error}</p>
         </div>
       )}
 
       {/* STATS */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
-
         <StatsCard
           title="Total Enquiries"
           value={stats.totalEnquiries}
@@ -378,13 +280,11 @@ const AdminDashboard = () => {
             </svg>
           )}
         />
-
       </div>
 
       {/* QUICK ACTIONS */}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-14">
-
         <QuickActionCard
           title="View Enquiries"
           description="Manage student admission enquiries"
@@ -472,17 +372,13 @@ const AdminDashboard = () => {
             </svg>
           )}
         />
-
       </div>
 
       {/* RECENT GALLERY */}
 
       <div className="mt-10">
-
         <div className="flex items-center justify-between mb-6">
-
           <div>
-
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               Recent Gallery Uploads
             </h2>
@@ -490,7 +386,6 @@ const AdminDashboard = () => {
             <p className="text-gray-600 dark:text-gray-400 mt-1">
               Latest academy photos & videos
             </p>
-
           </div>
 
           <Link
@@ -499,13 +394,10 @@ const AdminDashboard = () => {
           >
             Open Gallery Manager
           </Link>
-
         </div>
 
         {galleryMedia.length === 0 ? (
-
           <div className="bg-white dark:bg-[#111827] border border-gray-100 dark:border-gray-700 rounded-3xl p-12 text-center">
-
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
               No Media Uploaded
             </h3>
@@ -513,37 +405,27 @@ const AdminDashboard = () => {
             <p className="text-gray-500 dark:text-gray-400">
               Upload photos/videos from gallery manager.
             </p>
-
           </div>
-
         ) : (
-
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-
             {galleryMedia.map((item) => (
-
               <div
                 key={item._id}
                 className="bg-white dark:bg-[#111827] rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-
                 <div className="aspect-[9/12] bg-black">
-
                   <CloudinaryMedia
                     publicId={item.publicId}
                     type={item.mediaType}
                   />
-
                 </div>
 
                 <div className="p-5">
-
                   <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-1">
                     {item.title}
                   </h3>
 
                   <div className="flex items-center justify-between mt-3">
-
                     <span className="text-sm text-gray-500 dark:text-gray-400 capitalize">
                       {item.mediaType}
                     </span>
@@ -551,21 +433,13 @@ const AdminDashboard = () => {
                     <span className="text-xs bg-[#556b2f]/10 text-[#556b2f] px-3 py-1 rounded-full">
                       Gallery
                     </span>
-
                   </div>
-
                 </div>
-
               </div>
-
             ))}
-
           </div>
-
         )}
-
       </div>
-
     </div>
   );
 };

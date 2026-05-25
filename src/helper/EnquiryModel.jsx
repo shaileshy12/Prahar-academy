@@ -1,5 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import API from "../services/api.js";
 
 const stationGroups = {
   western: [
@@ -76,7 +77,7 @@ const EnquiryModal = ({ isLoggedIn = false }) => {
       !formData.email.trim() ||
       !formData.preferredCourse.trim()
     ) {
-      alert("Full name, email, phone, and course are required");
+      toast.error("Full name, email, phone, and course are required");
       setIsSubmitting(false);
       return;
     }
@@ -93,13 +94,13 @@ const EnquiryModal = ({ isLoggedIn = false }) => {
         }`,
       };
 
-      const res = await axios.post(
-        "http://localhost:4000/api/v1/user/enquiry",
+      const res = await API.post(
+        "/api/v1/user/enquiry",
         payload
       );
 
       if (res.data.success) {
-        alert(
+        toast.success(
           "Enquiry submitted successfully! We will contact you within 24 hours."
         );
         setOpen(false);
@@ -119,7 +120,7 @@ const EnquiryModal = ({ isLoggedIn = false }) => {
       const errorMsg =
         error.response?.data?.message ||
         "Something went wrong. Please try again.";
-      alert(errorMsg);
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }

@@ -1,6 +1,7 @@
 // src/pages/Admin/AdminLogin.jsx
 import React, { useState } from "react";
-import axios from "axios";
+import toast from "react-hot-toast";
+import API from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
@@ -13,17 +14,15 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:4000/api/v1/admin/login", 
+      const res = await API.post(`/api/v1/admin/login`, 
         { email: formData.email, password: formData.password }, 
         { withCredentials: true }
       );
       if (res.data.success) {
-        const token = res.data.token || res.data.data?.token;
-        if (token) localStorage.setItem("adminToken", token);
         navigate("/admin/dashboard");
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -33,18 +32,18 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:4000/api/v1/admin/forgot-password", {
+      const res = await API.post(`/api/v1/admin/forgot-password`, {
         email: formData.email,
         newPassword: formData.password,
         recoveryKey: formData.recoveryKey
       });
       if (res.data.success) {
-        alert("Password reset! You can now log in.");
-        setIsResetMode(false); // Flip back to login mode
+        toast.success("Password reset! You can now log in.");
+        setIsResetMode(false); 
         setFormData({ ...formData, password: "", recoveryKey: "" });
       }
     } catch (error) {
-      alert((error.response?.data?.message || "Reset failed"));
+      toast.error((error.response?.data?.message || "Reset failed"));
     } finally {
       setLoading(false);
     }

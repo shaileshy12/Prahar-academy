@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import toast from "react-hot-toast";
+import API from "../../services/api";
 
 const AdminSettings = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -67,39 +68,46 @@ const AdminSettings = () => {
   }, []);
 
   const fetchInitialData = async () => {
-    try {
-      const token = localStorage.getItem(
-        "adminToken"
-      );
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      };
+  try {
 
-      const adminRes = await axios.get(
-        "http://localhost:4000/api/v1/admin/me",
+    const config = {
+      withCredentials: true,
+    };
+
+    const adminRes =
+      await API.get(
+
+        `/api/v1/admin/me`,
+
         config
+
       );
 
-      if (adminRes.data.success) {
-        setProfile({
-          fullName:
-            adminRes.data.data.fullName || "",
-          email:
-            adminRes.data.data.email || "",
-        });
-      }
+    if (adminRes.data.success) {
 
-    } catch (error) {
-      console.error(
-        "Failed to fetch settings",
-        error
-      );
+      setProfile({
+        fullName:
+          adminRes.data.data.fullName || "",
+
+        email:
+          adminRes.data.data.email || "",
+      });
+
     }
-  };
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Failed to fetch settings",
+      error
+    );
+
+  }
+
+};
 
   // ================= UPDATE PASSWORD =================
 
@@ -109,22 +117,13 @@ const AdminSettings = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem(
-        "adminToken"
-      );
 
-      await axios.put(
-        "http://localhost:4000/api/v1/admin/change-password",
+      await API.put(
+        `/api/v1/admin/change-password`,
         passwords,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
       );
 
-      alert("✅ Password updated successfully");
+      toast.success("✅ Password updated successfully");
 
       setPasswords({
         oldPassword: "",
@@ -132,7 +131,7 @@ const AdminSettings = () => {
       });
 
     } catch (error) {
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to update password"
       );
@@ -149,25 +148,16 @@ const AdminSettings = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem(
-        "adminToken"
-      );
 
-      await axios.put(
-        "http://localhost:4000/api/v1/admin/update-profile",
+      await API.put(
+        `/api/v1/admin/update-profile`,
         profile,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
       );
 
-      alert("✅ Profile updated successfully");
+      toast.success("Profile updated successfully");
 
     } catch (error) {
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to update profile"
       );
